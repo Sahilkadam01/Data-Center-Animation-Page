@@ -1,403 +1,293 @@
-gsap.registerPlugin(ScrollTrigger);
-
 document.addEventListener("DOMContentLoaded", () => {
 
-    const section = document.querySelector(".asic-section");
-    const wrapper = document.querySelector(".video-wrapper");
-    const video = document.querySelector(".asic-video");
-    const content = document.querySelector(".asic-content");
-    const tabs = document.querySelectorAll(".tab");
-    const title = document.querySelector(".asic-title");
+  const section = document.querySelector(".asic-section");
+  const wrapper = document.querySelector(".video-wrapper");
+  const video = document.querySelector(".asic-video");
+  const content = document.querySelector(".asic-content");
 
-    let animationPlayed = false;
+  let triggered = false;
 
-    // Hide content initially
-    gsap.set(content, {
-        opacity: 0,
-        y: 40
-    });
+  // SECTION ANIMATION
+  function activate() {
 
-    // SECTION ANIMATION
-    function playAnimation() {
+      if (triggered) return;
 
-        if (animationPlayed) return;
+      triggered = true;
 
-        animationPlayed = true;
+      video.play().catch(() => {});
 
-        video.play().catch(() => {});
+      setTimeout(() => {
+
+          wrapper.classList.add("shrink");
+
+          setTimeout(() => {
+              content.classList.add("show");
+          }, 500);
+
+      }, 300);
+
+  }
+
+  const observer = new IntersectionObserver((entries) => {
+
+      entries.forEach(entry => {
+
+          if (entry.isIntersecting) {
+
+              activate();
+
+          } else {
+
+              triggered = false;
+
+              wrapper.classList.remove("shrink");
+              content.classList.remove("show");
+
+          }
+
+      });
+
+  }, {
+      threshold: 0.6
+  });
+
+  observer.observe(section);
+
+  // TAB SWITCHER
+  const tabs = document.querySelectorAll(".tab");
+  const title = document.querySelector(".asic-title");
+
+  tabs.forEach(tab => {
+
+    tab.addEventListener("click", () => {
+
+        if (tab.classList.contains("active")) return;
+
+        tabs.forEach(btn => btn.classList.remove("active"));
+        tab.classList.add("active");
+
+        const newTitle = tab.dataset.title;
+        const newVideo = tab.dataset.video;
+
+        // OLD CONTENT ONLY GOES LEFT
+        title.style.transform = "translateX(-300px)";
+        title.style.opacity = "0";
+
+        video.style.transform = "translateX(-300px)";
+        video.style.opacity = "0";
 
         setTimeout(() => {
 
-            // Keep wrapper centered
-            gsap.set(wrapper, {
-                top: "57%",
-                left: "50%",
-                xPercent: -50,
-                yPercent: -50,
-                transformOrigin: "center center",
-                force3D: true
+            title.textContent = newTitle;
+
+            const source = video.querySelector("source");
+
+            if (source) {
+                source.src = newVideo;
+            }
+
+            video.load();
+            video.play().catch(() => {});
+
+            // NEW CONTENT STARTS FROM RIGHT
+            title.style.transition = "none";
+            video.style.transition = "none";
+
+            title.style.transform = "translateX(300px)";
+            title.style.opacity = "0";
+
+            video.style.transform = "translateX(300px)";
+            video.style.opacity = "0";
+
+            // Force repaint
+            void title.offsetWidth;
+
+            // Restore transition
+            title.style.transition = "transform .8s cubic-bezier(.22,.61,.36,1), opacity .8s ease";
+            video.style.transition = "transform .8s cubic-bezier(.22,.61,.36,1), opacity .8s ease";
+
+            requestAnimationFrame(() => {
+
+                // ONLY NEW CONTENT COMES FROM RIGHT
+                title.style.transform = "translateX(0)";
+                title.style.opacity = "1";
+
+                video.style.transform = "translateX(0)";
+                video.style.opacity = "1";
+
             });
 
-            const tl = gsap.timeline({
-                onComplete: () => {
-                    animationPlayed = false;
-                }
-            });
-
-            // Resize only
-            tl.to(wrapper, {
-                width: "1200px",
-                height: "700px",
-                borderRadius: "24px",
-
-                duration: 0.90,
-                ease: "expo.inOut",
-
-                force3D: true
-            })
-
-            .to(content, {
-                opacity: 1,
-                y: 0,
-
-                duration: 0.35,
-                ease: "power2.out"
-            }, "-=0.15");
-
-        }, 500);
-
-    }
-
-    ScrollTrigger.create({
-        trigger: section,
-        start: "top 50%",
-
-        onEnter: () => {
-
-            gsap.set(wrapper, {
-                clearProps: "all"
-            });
-
-            gsap.set(wrapper, {
-                width: "100vw",
-                height: "100vh",
-
-                top: "57%",
-                left: "50%",
-
-                xPercent: -50,
-                yPercent: -50,
-
-                borderRadius: 0
-            });
-
-            gsap.set(content, {
-                opacity: 0,
-                y: 40
-            });
-
-            playAnimation();
-        },
-
-        onEnterBack: () => {
-
-            gsap.set(wrapper, {
-                clearProps: "all"
-            });
-
-            gsap.set(wrapper, {
-                width: "100vw",
-                height: "100vh",
-
-                top: "57%",
-                left: "50%",
-
-                xPercent: -50,
-                yPercent: -50,
-
-                borderRadius: 0
-            });
-
-            gsap.set(content, {
-                opacity: 0,
-                y: 40
-            });
-
-            playAnimation();
-        }
-    });
-
-    // TAB SWITCHER
-    tabs.forEach(tab => {
-
-        tab.addEventListener("click", () => {
-
-            if (tab.classList.contains("active")) return;
-
-            tabs.forEach(btn => btn.classList.remove("active"));
-            tab.classList.add("active");
-
-            const newVideo = tab.dataset.video;
-            const newTitle = tab.dataset.title;
-
-            if (!newVideo) return;
-
-            const tl = gsap.timeline();
-
-            // OLD CONTENT OUT
-            tl.to(title, {
-                x: -180,
-                opacity: 0,
-                duration: 0.45,
-                ease: "power3.in"
-            }, 0)
-
-            .to(video, {
-                x: -300,
-                opacity: 0,
-                duration: 0.55,
-                ease: "power3.in"
-            }, 0)
-
-            .add(() => {
-
-                // Update Title
-                title.textContent = newTitle;
-
-                // Update Video
-                const source = video.querySelector("source");
-
-                if (source) {
-                    source.src = newVideo;
-                }
-
-                video.load();
-                video.play().catch(() => {});
-
-                // Prepare New Content
-                gsap.set(title, {
-                    x: 180,
-                    opacity: 0
-                });
-
-                gsap.set(video, {
-                    x: 300,
-                    opacity: 0
-                });
-
-            })
-
-            // NEW CONTENT IN
-            .to(title, {
-                x: 0,
-                opacity: 1,
-                duration: 0.65,
-                ease: "power4.out"
-            })
-
-            .to(video, {
-                x: 0,
-                opacity: 1,
-                duration: 0.75,
-                ease: "power4.out"
-            }, "<");
-
-        });
+        }, 400);
 
     });
 
 });
 
-
-
-
-
-
-
-
-
-
-
-// immediately resize teh video ////////////////////////////////////////////////////////
-
-
-// gsap.registerPlugin(ScrollTrigger);
-
-// document.addEventListener("DOMContentLoaded", () => {
-
-//     const section = document.querySelector(".asic-section");
-//     const wrapper = document.querySelector(".video-wrapper");
-//     const video = document.querySelector(".asic-video");
-//     const content = document.querySelector(".asic-content");
-//     const tabs = document.querySelectorAll(".tab");
-//     const title = document.querySelector(".asic-title");
-
-//     let animationPlayed = false;
-
-//     // Hide content initially
-//     gsap.set(content, {
-//         opacity: 0,
-//         y: 40
-//     });
-
-//     function playAnimation() {
-
-//         if (animationPlayed) return;
-
-//         animationPlayed = true;
-
-//         video.play().catch(() => {});
-
-//         gsap.set(wrapper, {
-//             top: "57%",
-//             left: "50%",
-//             xPercent: -50,
-//             yPercent: -50,
-//             transformOrigin: "center center",
-//             force3D: true
-//         });
-
-//         gsap.to(wrapper, {
-//             width: "1200px",
-//             height: "700px",
-//             borderRadius: "24px",
-
-//             duration: 0.65,
-//             ease: "power4.inOut",
-
-//             force3D: true,
-
-//             onComplete: () => {
-
-//                 animationPlayed = false;
-
-//                 gsap.to(content, {
-//                     opacity: 1,
-//                     y: 0,
-//                     duration: 0.35,
-//                     ease: "power2.out"
-//                 });
-
-//             }
-//         });
-//     }
-
-//     ScrollTrigger.create({
-//         trigger: section,
-//         start: "top 50%",
-
-//         onEnter: () => {
-
-//             gsap.set(wrapper, {
-//                 clearProps: "all"
-//             });
-
-//             gsap.set(wrapper, {
-//                 width: "100vw",
-//                 height: "100vh",
-//                 borderRadius: 0,
-
-//                 top: 0,
-//                 left: 0,
-
-//                 xPercent: 0,
-//                 yPercent: 0
-//             });
-
-//             gsap.set(content, {
-//                 opacity: 0,
-//                 y: 40
-//             });
-
-//             playAnimation();
-//         },
-
-//         onEnterBack: () => {
-
-//             gsap.set(wrapper, {
-//                 clearProps: "all"
-//             });
-
-//             gsap.set(wrapper, {
-//                 width: "100vw",
-//                 height: "100vh",
-//                 borderRadius: 0,
-
-//                 top: 0,
-//                 left: 0,
-
-//                 xPercent: 0,
-//                 yPercent: 0
-//             });
-
-//             gsap.set(content, {
-//                 opacity: 0,
-//                 y: 40
-//             });
-
-//             playAnimation();
-//         }
-//     });
-
-//     // Tab Video Switcher
-//     tabs.forEach(tab => {
-
-//         tab.addEventListener("click", () => {
-
-//             tabs.forEach(btn => btn.classList.remove("active"));
-//             tab.classList.add("active");
-
-//             const newVideo = tab.dataset.video;
-//             const newTitle = tab.dataset.title;
-
-//             // Title Animation
-//             gsap.to(title, {
-//                 opacity: 0,
-//                 y: -20,
-//                 duration: 0.25,
-
-//                 onComplete: () => {
-
-//                     title.textContent = newTitle;
-
-//                     gsap.to(title, {
-//                         opacity: 1,
-//                         y: 0,
-//                         duration: 0.35
-//                     });
-
-//                 }
-//             });
-
-//             if (!newVideo) return;
-
-//             // Video Switch Animation
-//             gsap.to(video, {
-//                 opacity: 0,
-//                 duration: 0.3,
-
-//                 onComplete: () => {
-
-//                     const source = video.querySelector("source");
-
-//                     if (source) {
-//                         source.src = newVideo;
-//                     }
-
-//                     video.load();
-
-//                     video.play().catch(() => {});
-
-//                     gsap.to(video, {
-//                         opacity: 1,
-//                         duration: 0.3
-//                     });
-
-//                 }
-//             });
-
-//         });
-
-//     });
-
-// });
+// packing section js start from here 
+/* ==========================================
+   PACKAGING SECTION
+========================================== */
+
+const packagingSection = document.querySelector(".packaging-section");
+const packagingWrapper = document.querySelector(".packaging-video-wrapper");
+const packagingVideo = document.querySelector(".packaging-video");
+const packagingContent = document.querySelector(".packaging-content");
+
+if (
+    packagingSection &&
+    packagingWrapper &&
+    packagingVideo &&
+    packagingContent
+) {
+
+    let packagingTriggered = false;
+
+    function activatePackaging() {
+
+        if (packagingTriggered) return;
+
+        packagingTriggered = true;
+
+        packagingVideo.play().catch(() => {});
+
+        setTimeout(() => {
+
+            packagingWrapper.classList.add("shrink");
+
+            setTimeout(() => {
+                packagingContent.classList.add("show");
+            }, 500);
+
+        }, 300);
+    }
+
+    const packagingObserver = new IntersectionObserver((entries) => {
+
+        entries.forEach(entry => {
+
+            if (entry.isIntersecting) {
+
+                activatePackaging();
+
+            } else {
+
+                packagingTriggered = false;
+
+                packagingWrapper.classList.remove("shrink");
+                packagingContent.classList.remove("show");
+            }
+
+        });
+
+    }, {
+        threshold: 0.6
+    });
+
+    packagingObserver.observe(packagingSection);
+
+    /* ==========================================
+       PACKAGING TAB SWITCHER
+    ========================================== */
+
+    const packTabs = document.querySelectorAll(".pack-tab");
+    const packContents = document.querySelectorAll(".packaging-content");
+    const packVideos = document.querySelectorAll(".packaging-video-wrapper");
+    
+    packTabs.forEach((tab, index) => {
+    
+        tab.addEventListener("click", () => {
+    
+            if(tab.classList.contains("active")) return;
+    
+            packTabs.forEach(t => t.classList.remove("active"));
+            tab.classList.add("active");
+    
+            const currentContent =
+                document.querySelector(".packaging-content.active");
+    
+            const currentVideo =
+                document.querySelector(".packaging-video-wrapper.active");
+    
+            // CURRENT OUT LEFT
+            if(currentContent){
+                currentContent.style.transform =
+                    "translateY(-50%) translateX(-300px)";
+                currentContent.style.opacity = "0";
+            }
+    
+            if(currentVideo){
+                currentVideo.style.transform =
+                    "translate(-50%,-50%) translateX(-300px)";
+                currentVideo.style.opacity = "0";
+            }
+    
+            setTimeout(() => {
+    
+                packContents.forEach(content => {
+                    content.classList.remove("active");
+                });
+    
+                packVideos.forEach(videoWrap => {
+                    videoWrap.classList.remove("active");
+                    videoWrap.classList.remove("shrink");
+                });
+    
+                const nextContent = packContents[index];
+                const nextVideo = packVideos[index];
+    
+                nextContent.classList.add("active");
+                nextVideo.classList.add("active");
+    
+                // START FROM RIGHT
+                nextContent.style.transition = "none";
+                nextVideo.style.transition = "none";
+    
+                nextContent.style.transform =
+                    "translateY(-50%) translateX(300px)";
+                nextContent.style.opacity = "0";
+    
+                nextVideo.style.transform =
+                    "translate(-50%,-50%) translateX(300px)";
+                nextVideo.style.opacity = "0";
+    
+                void nextContent.offsetWidth;
+    
+                nextContent.style.transition =
+                    "transform .8s cubic-bezier(.22,.61,.36,1), opacity .8s ease";
+    
+                nextVideo.style.transition =
+                    "transform .8s cubic-bezier(.22,.61,.36,1), opacity .8s ease";
+    
+                requestAnimationFrame(() => {
+    
+                    nextContent.style.transform =
+                        "translateY(-50%) translateX(0)";
+                    nextContent.style.opacity = "1";
+    
+                    nextVideo.style.transform =
+                        "translate(-50%,-50%) translateX(0)";
+                    nextVideo.style.opacity = "1";
+    
+                });
+    
+                const activeVideo = nextVideo.querySelector("video");
+    
+                if(activeVideo){
+                    activeVideo.currentTime = 0;
+                    activeVideo.play().catch(() => {});
+                }
+    
+                setTimeout(() => {
+                    nextVideo.classList.add("shrink");
+                }, 100);
+    
+            }, 400);
+    
+        });
+    
+    });
+}
+
+// end here
+
+});
