@@ -290,4 +290,28 @@ if (
 
 // end here
 
+// last section tabbers cards js start from hre
+const capCards = document.querySelectorAll(".cap-card");
+
+capCards.forEach(card => {
+
+    card.querySelector(".cap-toggle").addEventListener("click", () => {
+
+        capCards.forEach(item => {
+
+            if(item !== card){
+                item.classList.remove("active");
+            }
+
+        });
+
+        card.classList.toggle("active");
+
+    });
+
+});
+
+// end here 
+
+
 });
