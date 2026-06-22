@@ -8,10 +8,14 @@ html {
     scroll-behavior: smooth;
 }
 
+main {
+    height: 100vh;
+}
+
 /* ================= HERO ================= */
 
 .hero {
-   
+    height: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -22,7 +26,7 @@ html {
         #111111 40%,
         #000000 100%);
 
-    padding: 80px 5%;
+    padding: 0px 5%;
 }
 
 .hero-content {
@@ -405,6 +409,28 @@ html {
     z-index:2;
 }
 
+/* read more text css start from here */
+.more-text{
+    display:none;
+}
+
+.more-text.show{
+    display:inline;
+}
+
+.read-more-btn{
+    margin-top:20px;
+    background:none;
+    border:none;
+    padding:0;
+
+    color:#f59a2c;
+    cursor:pointer;
+
+    font-size:clamp(16px,1vw,20px);
+    font-weight:500;
+}
+
 /* slide leaving */
 .cap-slide.prev-slide{
     opacity:0;
@@ -611,7 +637,9 @@ section.last-sec .upper-sec {
     margin:0;
 }
 
-
+.upper-sec img {
+    max-width: 100%;
+}
 
 
 /* end here */
@@ -620,12 +648,47 @@ section.last-sec .upper-sec {
 
 /* Responsive */
 
+@media (width<=1500px)
+{
+    .slider-arrow {
+        display: none;
+    }
+
+    .slider-dots{
+        display:flex;
+        justify-content:center;
+        gap:12px;
+    
+        margin-top:40px;
+    }
+}
+
 @media(max-width:1200px){
 
     .cap-cards{
         grid-template-columns:repeat(2,1fr);
     }
 
+}
+
+@media (width<=1024px)
+{
+    .cap-slide {
+        flex-direction: column-reverse;
+    }
+
+    .cap-left h2
+    {
+        font-size: 30px;
+    }
+
+    
+
+.cap-right {
+  
+    min-height: 300px;
+  
+}
 }
 
 @media (max-width:991px){
@@ -670,17 +733,9 @@ section.last-sec .upper-sec {
 @media (max-width: 767px) {
 
 
-    .slider-arrow {
-        display: none;
-    }
-
-    .slider-dots{
-        display:flex;
-        justify-content:center;
-        gap:12px;
     
-        margin-top:40px;
-    }
+
+    
 
     .cap-cards{
         grid-template-columns:1fr;

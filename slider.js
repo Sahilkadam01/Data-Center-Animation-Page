@@ -119,3 +119,22 @@ function restartAuto(){
 }
 
 startAuto();
+
+// js for read more text functionality
+document.querySelectorAll(".read-more-btn").forEach(btn => {
+
+    btn.addEventListener("click", () => {
+
+        const moreText =
+        btn.previousElementSibling.querySelector(".more-text");
+
+        moreText.classList.toggle("show");
+
+        btn.textContent =
+        moreText.classList.contains("show")
+            ? "Read Less"
+            : "Read More";
+
+    });
+
+});
