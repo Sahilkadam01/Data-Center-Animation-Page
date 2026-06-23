@@ -164,6 +164,7 @@ main {
     display: flex;
     justify-content: center;
     gap: 20px;
+    margin: 10px 0;
 }
 
 .asic-section .tab {
@@ -206,8 +207,9 @@ main {
 .packaging-section .packaging-video-wrapper{
     position:absolute;
 
-    top:50%;
+  
     left:50%;
+    top:50%;
 
     width:100vw;
     height:100vh;
@@ -217,30 +219,27 @@ main {
     overflow:hidden;
 
     transition:
-    width .9s cubic-bezier(.87,0,.13,1),
-    height .9s cubic-bezier(.87,0,.13,1),
-    left .9s cubic-bezier(.87,0,.13,1),
-    top .9s cubic-bezier(.87,0,.13,1),
-    border-radius .9s cubic-bezier(.87,0,.13,1);
+        width .9s cubic-bezier(.87,0,.13,1),
+        height .9s cubic-bezier(.87,0,.13,1),
+        border-radius .9s cubic-bezier(.87,0,.13,1);
 }
 
-/* FINAL RIGHT SIDE */
-
+/* FINAL SHRUNK STATE */
 .packaging-section .packaging-video-wrapper.shrink{
-
-    width:52%;
-    height:70%;
-
+    width:min(48vw,700px);
+    height:min(60vh,500px);
     left:72%;
     top:58%;
-
-    border-radius:24px;
+    transform:translate(-48%,-50%);
 }
-
 .packaging-section .packaging-video{
     width:100%;
     height:100%;
     object-fit:cover;
+    transition:
+    transform .8s cubic-bezier(.22,.61,.36,1),
+    opacity .8s ease;
+
 }
 
 /* LEFT CONTENT */
@@ -263,6 +262,7 @@ main {
     transition:
     opacity .6s ease,
     transform .6s ease;
+    /* will-change: transform, opacity; */
 }
 
 .packaging-section .packaging-content.show{
@@ -325,19 +325,29 @@ main {
     transition:.5s ease;
 }
 
-.packaging-section .packaging-content.active,
-.packaging-section .packaging-video-wrapper.active{
+.packaging-section .packaging-content.active{
     opacity:1;
     visibility:visible;
     pointer-events:auto;
     z-index: 1;
 }
 
+.packaging-video-wrapper.active{
+    opacity:1;
+    visibility:visible;
+    pointer-events:auto;
+    z-index:5;
+}
+
+.packaging-video-wrapper{
+    z-index:0;
+}
+
 
 .packaging-section .packaging-video-wrapper{
     width:100vw;
     height:100vh;
-
+    will-change: width,height,left,top;
     transition:
         width .9s cubic-bezier(.87,0,.13,1),
         height .9s cubic-bezier(.87,0,.13,1),
@@ -351,10 +361,14 @@ main {
     width:min(48vw,700px);
     height:min(60vh,500px);
 
-    left:72%;
-    top:58%;
+    /* left:72%;
+    top:58%; */
 
     border-radius:24px;
+}
+
+.packaging-video{
+    will-change: transform, opacity;
 }
 /* end here  */
 
@@ -659,7 +673,7 @@ section.last-sec .upper-sec {
         justify-content:center;
         gap:12px;
     
-        margin-top:40px;
+        margin-top:20px;
     }
 }
 
@@ -732,10 +746,10 @@ section.last-sec .upper-sec {
 
 @media (max-width: 767px) {
 
-
-    
-
-    
+    .packaging-section .packaging-title {
+        
+        font-size: clamp(36px, 5vh, 90px);
+    }
 
     .cap-cards{
         grid-template-columns:1fr;
@@ -752,7 +766,7 @@ section.last-sec .upper-sec {
     }   
 
     .hero h1{
-        font-size: 2em;
+        font-size: 2.3em;
     }
 
     .packaging-section .packaging-video-area {
@@ -760,24 +774,24 @@ section.last-sec .upper-sec {
     }
 
     .asic-section .asic-title {
-        font-size: 42px;
+        font-size:clamp(36px, 4vh, 90px);
     }
 
-    .asic-section .video-wrapper.shrink {
-        width: 90vw;
-        height: 50vh;
+ 
+}
+
+@media screen and (width<=500px)
+{
+        .packaging-section .packaging-content {
+            top: 188px;
+       
     }
 }
 
-
 @media (width<=475px)
 {
-    .packaging-section .packaging-video-wrapper.shrink{
-
-        
-        top:77%;
-
-        
+    .packaging-section .packaging-video-wrapper.shrink{       
+        top:77%;       
     }
 }
 
@@ -786,7 +800,7 @@ section.last-sec .upper-sec {
 @media (max-height:900px){
 
     .packaging-section .packaging-title{
-        font-size:56px;
+        font-size:clamp(50px, 6vh, 90px);
         margin-bottom:20px;
     }
 
@@ -804,7 +818,7 @@ section.last-sec .upper-sec {
 @media (max-height:768px){
 
     .packaging-section .packaging-title{
-        font-size:44px;
+        font-size:clamp(36px, 4vh, 50px);
         margin-bottom:15px;
     }
 
@@ -827,3 +841,4 @@ section.last-sec .upper-sec {
         font-size:13px;
     }
 }
+
