@@ -1,6 +1,5 @@
-const slides = document.querySelectorAll(".cap-slide");
+const slides = document.querySelectorAll(" .cap-slide");
 const dots = document.querySelectorAll(".slider-dots span");
-
 const prev = document.querySelector(".prev");
 const next = document.querySelector(".next");
 
@@ -138,3 +137,4 @@ document.querySelectorAll(".read-more-btn").forEach(btn => {
     });
 
 });
+

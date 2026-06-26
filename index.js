@@ -404,166 +404,6 @@ if (
 
 }
 
-// const packagingSection = document.querySelector(".packaging-section");
-// const packagingWrapper = document.querySelector(".packaging-video-wrapper");
-// const packagingVideo = document.querySelector(".packaging-video");
-// const packagingContent = document.querySelector(".packaging-content");
-
-// if (
-//     packagingSection &&
-//     packagingWrapper &&
-//     packagingVideo &&
-//     packagingContent
-// ) {
-
-//     let packagingTriggered = false;
-
-//     function activatePackaging() {
-
-//         if (packagingTriggered) return;
-
-//         packagingTriggered = true;
-
-//         packagingVideo.play().catch(() => {});
-
-//         setTimeout(() => {
-
-//             packagingWrapper.classList.add("shrink");
-
-//             setTimeout(() => {
-//                 packagingContent.classList.add("show");
-//             }, 500);
-
-//         }, 300);
-//     }
-
-//     const packagingObserver = new IntersectionObserver((entries) => {
-
-//         entries.forEach(entry => {
-
-//             if (entry.isIntersecting) {
-
-//                 activatePackaging();
-
-//             } else {
-
-//                 packagingTriggered = false;
-
-//                 packagingWrapper.classList.remove("shrink");
-//                 packagingContent.classList.remove("show");
-//             }
-
-//         });
-
-//     }, {
-//         threshold: 0.6
-//     });
-
-//     packagingObserver.observe(packagingSection);
-
-//     /* ==========================================
-//        PACKAGING TAB SWITCHER
-//     ========================================== */
-
-//     const packTabs = document.querySelectorAll(".pack-tab");
-//     const packContents = document.querySelectorAll(".packaging-content");
-//     const packVideos = document.querySelectorAll(".packaging-video-wrapper");
-    
-//     packTabs.forEach((tab, index) => {
-    
-//         tab.addEventListener("click", () => {
-    
-//             if(tab.classList.contains("active")) return;
-    
-//             packTabs.forEach(t => t.classList.remove("active"));
-//             tab.classList.add("active");
-    
-//             const currentContent =
-//                 document.querySelector(".packaging-content.active");
-    
-//             const currentVideo =
-//                 document.querySelector(".packaging-video-wrapper.active");
-    
-//             // CURRENT OUT LEFT
-//             if(currentContent){
-//                 currentContent.style.transform =
-//                     "translateY(-50%) translateX(-300px)";
-//                 currentContent.style.opacity = "0";
-//             }
-    
-//             if(currentVideo){
-//                 currentVideo.style.transform =
-//                     "translate(-50%,-50%) translateX(-300px)";
-//                 currentVideo.style.opacity = "0";
-//             }
-    
-//             setTimeout(() => {
-    
-//                 packContents.forEach(content => {
-//                     content.classList.remove("active");
-//                 });
-    
-//                 packVideos.forEach(videoWrap => {
-//                     videoWrap.classList.remove("active");
-//                     videoWrap.classList.remove("shrink");
-//                 });
-    
-//                 const nextContent = packContents[index];
-//                 const nextVideo = packVideos[index];
-    
-//                 nextContent.classList.add("active");
-//                 nextVideo.classList.add("active");
-    
-//                 // START FROM RIGHT
-//                 nextContent.style.transition = "none";
-//                 nextVideo.style.transition = "none";
-    
-//                 nextContent.style.transform =
-//                     "translateY(-50%) translateX(300px)";
-//                 nextContent.style.opacity = "0";
-    
-//                 nextVideo.style.transform =
-//                     "translate(-50%,-50%) translateX(300px)";
-//                 nextVideo.style.opacity = "0";
-    
-//                 void nextContent.offsetWidth;
-    
-//                 nextContent.style.transition =
-//                     "transform .8s cubic-bezier(.22,.61,.36,1), opacity .8s ease";
-    
-//                 nextVideo.style.transition =
-//                     "transform .8s cubic-bezier(.22,.61,.36,1), opacity .8s ease";
-    
-//                 requestAnimationFrame(() => {
-    
-//                     nextContent.style.transform =
-//                         "translateY(-50%) translateX(0)";
-//                     nextContent.style.opacity = "1";
-    
-//                     nextVideo.style.transform =
-//                         "translate(-50%,-50%) translateX(0)";
-//                     nextVideo.style.opacity = "1";
-    
-//                 });
-    
-//                 const activeVideo = nextVideo.querySelector("video");
-    
-//                 if(activeVideo){
-//                     activeVideo.currentTime = 0;
-//                     activeVideo.play().catch(() => {});
-//                 }
-    
-//                 setTimeout(() => {
-//                     nextVideo.classList.add("shrink");
-//                 }, 100);
-    
-//             }, 400);
-    
-//         });
-    
-//     });
-// }
-
 // end here
 
 // last section tabbers cards js start from hre
@@ -589,5 +429,117 @@ capCards.forEach(card => {
 
 // end here 
 
+
+// partner section js start from here
+const cards = document.querySelectorAll(".partner-card");
+
+/* EXPAND BUTTON */
+cards.forEach(card => {
+
+    const btn = card.querySelector(".expand-btn");
+
+    btn.addEventListener("click", (e) => {
+
+        e.stopPropagation();
+
+        if(card.classList.contains("active")){
+
+            card.classList.remove("active");
+
+            cards.forEach(other => {
+                other.classList.remove("hide");
+            });
+
+            return;
+        }
+
+        cards.forEach(other => {
+
+            other.classList.remove("active");
+            other.classList.remove("hide");
+
+        });
+
+        card.classList.add("active");
+
+        cards.forEach(other => {
+
+            if(other !== card){
+                other.classList.add("hide");
+            }
+
+        });
+
+    });
+
+    /* CLICK ACTIVE CARD TO CLOSE */
+    card.addEventListener("click", (e) => {
+
+        if(
+            card.classList.contains("active") &&
+            !e.target.closest(".expand-btn")
+        ){
+
+            card.classList.remove("active");
+
+            cards.forEach(other => {
+                other.classList.remove("hide");
+            });
+
+        }
+
+    });
+
+});
+
+/* CLICK OUTSIDE */
+document.addEventListener("click", (e) => {
+
+    if(!e.target.closest(".partner-card")){
+
+        cards.forEach(card => {
+
+            card.classList.remove("active");
+            card.classList.remove("hide");
+
+        });
+
+    }
+
+});
+
+
+
+// end here
+
+// navbar js start from here
+const menuBtn = document.querySelector(".menu-btn");
+const nav = document.querySelector(".nav");
+
+menuBtn.addEventListener("click", () => {
+
+    nav.classList.toggle("active");
+    menuBtn.classList.toggle("active");
+
+    if(menuBtn.classList.contains("active")){
+
+        menuBtn.children[0].style.transform =
+        "rotate(45deg) translateY(10px)";
+
+        menuBtn.children[1].style.opacity = "0";
+
+        menuBtn.children[2].style.transform =
+        "rotate(-45deg) translateY(-10px)";
+    }
+    else{
+
+        menuBtn.children[0].style.transform = "";
+
+        menuBtn.children[1].style.opacity = "1";
+
+        menuBtn.children[2].style.transform = "";
+    }
+});
+// end here
 
 });
