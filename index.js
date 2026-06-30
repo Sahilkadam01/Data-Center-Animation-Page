@@ -123,10 +123,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 });
 
-// packing section js start from here 
-/* ==========================================
-   PACKAGING SECTION
-========================================== */
+
 
 /* ==========================================
    PACKAGING SECTION
@@ -150,6 +147,10 @@ document.querySelectorAll(".packaging-content");
 const packVideos =
 document.querySelectorAll(".packaging-video-wrapper");
 
+const titleWrap = packagingSection.querySelector(".title-wrap");
+
+    
+
 if (
     packagingSection &&
     packagingVideo &&
@@ -158,41 +159,123 @@ if (
 ) {
 
     let packagingTriggered = false;
+    let played = false;
 
     /* ==========================================
        SECTION ENTRY ANIMATION
     ========================================== */
 
+    function playTitleAnimation(){
+
+        if(played) return;
+
+        played = true;
+
+        // Reset state
+        titleWrap.classList.remove("animate");
+
+        void titleWrap.offsetWidth;
+
+        // Wait a little so the title is visible first
+        setTimeout(()=>{
+
+            titleWrap.classList.add("animate");
+
+        },600);
+
+    }
+
+
     function activatePackaging() {
 
         if (packagingTriggered) return;
-
+    
         packagingTriggered = true;
+    
+        // Reset title animation
+        played = false;
+        titleWrap.classList.remove("animate");
+        void titleWrap.offsetWidth;
+    
+        // Keep title visible for a moment
+        setTimeout(() => {
+    
+            titleWrap.classList.add("animate");
+    
+        }, 600);
+    
+        // Wait until title animation completes
+        setTimeout(() => {
+    
+            // Hide title completely
+            titleWrap.style.display = "none";
+    
+            // Start video
+            packagingVideo.currentTime = 0;
+            packagingVideo.play().catch(() => {});
+    
+            // Shrink video
 
-        packagingVideo.play().catch(() => {});
+            // Play video
+packagingVideo.currentTime = 0;
+packagingVideo.play().catch(() => {});
+
+// Wait until video metadata is loaded
+const startShrink = () => {
+
+    const duration = packagingVideo.duration;
+
+    // If duration isn't available, use a fallback
+    if (!duration || isNaN(duration)) {
 
         setTimeout(() => {
 
-            /* FIX 2 */
             packVideos.forEach(video => {
                 video.classList.add("shrink");
             });
 
-            setTimeout(() => {
+            const activeContent = document.querySelector(".packaging-content.active");
 
-                const activeContent =
-                document.querySelector(
-                    ".packaging-content.active"
-                );
+            if (activeContent) {
+                activeContent.classList.add("show");
+            }
 
-                if(activeContent){
-                    activeContent.classList.add("show");
-                }
+        }, 5000);
 
-            }, 500);
+        return;
+    }
 
-        }, 300);
+    // Shrink 2 seconds before the video ends
+    const shrinkTime = Math.max((duration - 2) * 1000, 0);
 
+    setTimeout(() => {
+
+        packVideos.forEach(video => {
+            video.classList.add("shrink");
+        });
+
+        setTimeout(() => {
+
+            const activeContent = document.querySelector(".packaging-content.active");
+
+            if (activeContent) {
+                activeContent.classList.add("show");
+            }
+
+        }, 500);
+
+    }, shrinkTime);
+};
+
+// Metadata may already be loaded
+if (packagingVideo.readyState >= 1) {
+    startShrink();
+} else {
+    packagingVideo.addEventListener("loadedmetadata", startShrink, { once: true });
+}
+    
+        }, 1800);
+    
     }
 
     const packagingObserver =
@@ -205,6 +288,14 @@ if (
                 activatePackaging();
 
             } else {
+
+                titleWrap.style.display = "flex";
+titleWrap.classList.remove("animate");
+
+                played = false;
+
+                titleWrap.classList.remove("animate");
+
 
                 packagingTriggered = false;
 
@@ -402,7 +493,79 @@ if (
 
     });
 
+// mouse drag
+/* ==========================================
+   MOUSE DRAG / SWIPE TABS
+========================================== */
+/* ==========================================
+   DRAG TO CHANGE TAB
+========================================== */
+
+let dragStartX = 0;
+let dragging = false;
+let currentIndex = 0;
+
+// Keep current index updated
+packTabs.forEach((tab, index) => {
+    tab.addEventListener("click", () => {
+        currentIndex = index;
+    });
+});
+
+// Drag on the whole packaging area
+const dragArea = document.querySelector(".packaging-wrap");
+
+dragArea.addEventListener("pointerdown", (e) => {
+
+    dragging = true;
+    dragStartX = e.clientX;
+
+});
+
+window.addEventListener("pointerup", (e) => {
+
+    if (!dragging) return;
+
+    dragging = false;
+
+    const distance = e.clientX - dragStartX;
+
+    // Ignore tiny movements
+    if (Math.abs(distance) < 100) return;
+
+    // Swipe Left
+    if (distance < 0) {
+
+        if (currentIndex < packTabs.length - 1) {
+
+            currentIndex++;
+
+            packTabs[currentIndex].click();
+
+        }
+
+    }
+
+    // Swipe Right
+    else {
+
+        if (currentIndex > 0) {
+
+            currentIndex--;
+
+            packTabs[currentIndex].click();
+
+        }
+
+    }
+
+});
+
+    
+
 }
+
+
 
 // end here
 

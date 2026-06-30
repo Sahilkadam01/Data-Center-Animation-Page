@@ -588,6 +588,100 @@ ANIMATIONS
 .packaging-video{
     will-change: transform, opacity;
 }
+
+/* ==========================================
+   HERO TITLE
+========================================== */
+
+.title-wrap{
+    position:absolute;
+    inset:0;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    z-index:100;
+
+    pointer-events:none;
+
+    opacity:1;
+
+    transform:scale(1);
+    width: 100%;
+    height: 100%;
+    background: black;
+    transition:
+        transform 1.5s cubic-bezier(.22,.61,.36,1),
+        opacity 1s ease;
+}
+
+.title-wrap.animate{
+
+    transform:scale(2.5);
+
+    opacity:0;
+}
+
+.packaging-hero-title{
+
+    margin:0;
+
+    color:#fff;
+
+    font-size:clamp(40px,8vw,110px);
+
+    text-align:center;
+}
+
+/* .packaging-section:has(.packaging-video-wrapper.active.shrink) .title-warp {
+   display: none;
+} */
+
+/* .packaging-hero-title{
+
+    position:relative;
+
+    top:50%;
+    left:50%;
+
+    transform:translate(-50%,-50%) scale(.8);
+
+    margin:0;
+
+    width:90%;
+
+    text-align:center;
+
+    color:#fff;
+
+    font-size:clamp(40px,7vw,110px);
+
+    font-family:'Riona Sans Light';
+
+    opacity:1;
+
+    z-index:999;
+
+    pointer-events:none;
+
+    transition:
+    transform 1.2s cubic-bezier(.22,.61,.36,1),
+    opacity .8s ease;
+} */
+
+
+
+
+
+
+
+
+
+
+
+
+
 /* end here  */
 
 
