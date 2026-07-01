@@ -94,6 +94,7 @@
     <div class="asic-tabs">
 <button
     class="tab active"
+    data-type="video"
     data-video="/assets/videos/video.mp4"
     data-title="Custom ASIC Design">
     01
@@ -101,6 +102,7 @@
 
 <button
     class="tab"
+    data-type="video"
     data-video="/assets/videos/video2.mp4"
     data-title="AI Accelerator">
     02
@@ -108,138 +110,95 @@
 
 <button
     class="tab"
-    data-video="/assets/videos/video3.mp4"
+    data-type="image"
+    data-image="./assets/images/img3.jpg"
     data-title="Networking Silicon">
     03
 </button>
 
 <button
     class="tab"
-    data-video="/assets/videos/video4.mp4"
-    data-title="Advanced Packaging">
+    data-type="card"
+    data-title="Advanced Packaging"
+    data-card-title="Chiplet Design"
+    data-card-description="This card contains any HTML content you want.">
     04
 </button>
-</div>
+
+<button
+    class="tab"
+    data-type="card"
+    data-title="Custom Crads"
+
+    data-card1-title="2.5D"
+    data-card1-desc="High bandwidth"
+
+    data-card2-title="3D"
+    data-card2-desc="Vertical stacking"
+
+    data-card3-title="CoWoS"
+    data-card3-desc="Advanced packaging">
+
+    05
+
+</button>
 
 </div>
 
-<div class="video-wrapper">
+</div>
 
+
+<div class="media-wrapper">
+
+    <!-- VIDEO -->
     <video
-class="asic-video"
-muted
-playsinline
-loop
-preload="metadata"
->
-<source src="/assets/videos/video.mp4" type="video/mp4">
-</video>
+        class="asic-video"
+        muted
+        playsinline
+        loop
+        preload="metadata">
+
+        <source src="/assets/videos/video.mp4" type="video/mp4">
+
+    </video>
+
+    <!-- IMAGE -->
+    <img
+        class="asic-image"
+        src="./assets/images/img3.jpg"
+        alt="ASIC Image">
+
+
+        <div class="asic-card">
+
+            <div class="card-item">
+                <h3 class="card1-title">Early node adoption
+                    </h3>
+                <p class="card1-desc">MediaTek is at the cutting edge of process technology with 10-tape-outs on N3, 2+ on N2, and our first A14 test chip aping out later this year</p>
+            </div>
+        
+            <div class="card-item">
+                <h3 class="card2-title">Design-Technology Co-Optimization (DTCO)
+                    </h3>
+                <p class="card2-desc">Through DTCO, we work directly with leading fabs SOTA process nodes to tweak the process and customize, optimize transistors</p>
+            </div>
+        
+            <div class="card-item">
+                <h3 class="card3-title">Compute Efficiency Through Lower Voltage Operation
+                    </h3>
+                <p class="card3-desc">MediaTek's extensive mobile experience gives us a significant head start in applying these learnings to data center chips</p>
+            </div>
+        
+        </div>
 
 </div>
+
+
 
 </section>
 
 
 
-
-
-<section class="packaging-section">
-
-<div class="title-wrap">
-    <h1 class="packaging-hero-title">
-        Advanced Packaging
-    </h1>
-</div>
-
-
-    <div class="packaging-content-wrapper">
-
-        <!-- TAB 1 -->
-        <div class="packaging-content active">
-
-            <h2 class="packaging-title">
-                Advanced Packaging
-            </h2>
-
-            <p class="packaging-desc">
-                Packaging is no longer an afterthought because meeting the
-                performance and power-efficiency needs of today can't be achieved
-                without it. The silicon-packaging co-design is a fundamental part
-                of the modern system canvas.
-            </p>
-
-        </div>
-
-        <!-- TAB 2 -->
-        <div class="packaging-content">
-
-            <h2 class="packaging-title">
-                Advanced Packaging 2.5D
-            </h2>
-
-            <p class="packaging-desc">
-                2.5D packaging enables multiple chiplets to communicate through a
-                high-bandwidth silicon interposer. This approach improves
-                performance, scalability and power efficiency while reducing
-                latency.
-            </p>
-
-        </div>
-
-        <!-- TAB 3 -->
-        <div class="packaging-content">
-
-            <h2 class="packaging-title">
-                Advanced Packaging 3.5D
-            </h2>
-
-            <p class="packaging-desc">
-                3.5D integration combines advanced stacking technologies with
-                high-density interconnects, enabling higher compute density and
-                faster data movement across heterogeneous silicon components.
-            </p>
-
-        </div>
-
-    </div>
-
-    <div class="packaging-video-area">
-
-        <!-- Intro Video (Only One) -->
-        <div class="packaging-intro-video-wrapper">
-    
-            <video class="packaging-intro-video" muted playsinline preload="metadata"><source  src="./assets/videos/Creating-the-building-blocks-for-the.mp4" type="video/mp4"></video>
-    
-        </div>
-    
-        <div class="packaging-tabs">
-    
-            <button class="pack-tab active">Overview</button>
-            <button class="pack-tab">2.5D</button>
-            <button class="pack-tab">3.5D</button>
-    
-        </div>
-    
-        <!-- Image 1 -->
-        <div class="packaging-video-wrapper active">
-            <img class="img-card" src="./assets/images/Overview.png">
-        </div>
-    
-        <!-- Image 2 -->
-        <div class="packaging-video-wrapper">
-            <img class="img-card" src="./assets/images/2.5D.png">
-        </div>
-    
-        <!-- Image 3 -->
-        <div class="packaging-video-wrapper">
-            <img class="img-card" src="./assets/images/3.5D.png">
-        </div>
-    
-    </div>
-
-
-
-</section>
 
 
 
@@ -611,6 +570,9 @@ preload="metadata"
 
 <script src="index.js"></script>
 <script src="slider.js"></script>
+
+<script src="asic.js"></script>
+
 <script src="packaging.js"></script>
 
 

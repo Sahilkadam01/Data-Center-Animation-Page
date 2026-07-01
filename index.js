@@ -1,235 +1,235 @@
 document.addEventListener("DOMContentLoaded", () => {
 
-  const section = document.querySelector(".asic-section");
-  const wrapper = document.querySelector(".video-wrapper");
-  const video = document.querySelector(".asic-video");
-  const content = document.querySelector(".asic-content");
+//   const section = document.querySelector(".asic-section");
+//   const wrapper = document.querySelector(".video-wrapper");
+//   const video = document.querySelector(".asic-video");
+//   const content = document.querySelector(".asic-content");
 
-  let triggered = false;
+//   let triggered = false;
 
-  // SECTION ANIMATION
-  function activate() {
+//   // SECTION ANIMATION
+//   function activate() {
 
-      if (triggered) return;
+//       if (triggered) return;
 
-      triggered = true;
+//       triggered = true;
 
-      video.play().catch(() => {});
+//       video.play().catch(() => {});
 
-      setTimeout(() => {
+//       setTimeout(() => {
 
-          wrapper.classList.add("shrink");
+//           wrapper.classList.add("shrink");
 
-          setTimeout(() => {
-              content.classList.add("show");
-          }, 500);
+//           setTimeout(() => {
+//               content.classList.add("show");
+//           }, 500);
 
-      }, 300);
+//       }, 300);
 
-  }
+//   }
 
-  const observer = new IntersectionObserver((entries) => {
+//   const observer = new IntersectionObserver((entries) => {
 
-      entries.forEach(entry => {
+//       entries.forEach(entry => {
 
-          if (entry.isIntersecting) {
+//           if (entry.isIntersecting) {
 
-              activate();
+//               activate();
 
-          } else {
+//           } else {
 
-              triggered = false;
+//               triggered = false;
 
-              wrapper.classList.remove("shrink");
-              content.classList.remove("show");
+//               wrapper.classList.remove("shrink");
+//               content.classList.remove("show");
 
-          }
+//           }
 
-      });
+//       });
 
-  }, {
-      threshold: 0.6
-  });
+//   }, {
+//       threshold: 0.6
+//   });
 
-  observer.observe(section);
+//   observer.observe(section);
 
-  // TAB SWITCHER
-  const tabs = document.querySelectorAll(".tab");
-  const title = document.querySelector(".asic-title");
+//   // TAB SWITCHER
+//   const tabs = document.querySelectorAll(".tab");
+//   const title = document.querySelector(".asic-title");
 
-  tabs.forEach(tab => {
+//   tabs.forEach(tab => {
 
-    tab.addEventListener("click", () => {
+//     tab.addEventListener("click", () => {
 
-        if (tab.classList.contains("active")) return;
+//         if (tab.classList.contains("active")) return;
 
-        tabs.forEach(btn => btn.classList.remove("active"));
-        tab.classList.add("active");
+//         tabs.forEach(btn => btn.classList.remove("active"));
+//         tab.classList.add("active");
 
-        const newTitle = tab.dataset.title;
-        const newVideo = tab.dataset.video;
+//         const newTitle = tab.dataset.title;
+//         const newVideo = tab.dataset.video;
 
-        // OLD CONTENT ONLY GOES LEFT
-        title.style.transform = "translateX(-300px)";
-        title.style.opacity = "0";
+//         // OLD CONTENT ONLY GOES LEFT
+//         title.style.transform = "translateX(-300px)";
+//         title.style.opacity = "0";
 
-        video.style.transform = "translateX(-300px)";
-        video.style.opacity = "0";
+//         video.style.transform = "translateX(-300px)";
+//         video.style.opacity = "0";
 
-        setTimeout(() => {
+//         setTimeout(() => {
 
-            title.textContent = newTitle;
+//             title.textContent = newTitle;
 
-            const source = video.querySelector("source");
+//             const source = video.querySelector("source");
 
-            if (source) {
-                source.src = newVideo;
-            }
+//             if (source) {
+//                 source.src = newVideo;
+//             }
 
-            video.load();
-            video.play().catch(() => {});
+//             video.load();
+//             video.play().catch(() => {});
 
-            // NEW CONTENT STARTS FROM RIGHT
-            title.style.transition = "none";
-            video.style.transition = "none";
+//             // NEW CONTENT STARTS FROM RIGHT
+//             title.style.transition = "none";
+//             video.style.transition = "none";
 
-            title.style.transform = "translateX(300px)";
-            title.style.opacity = "0";
+//             title.style.transform = "translateX(300px)";
+//             title.style.opacity = "0";
 
-            video.style.transform = "translateX(300px)";
-            video.style.opacity = "0";
+//             video.style.transform = "translateX(300px)";
+//             video.style.opacity = "0";
 
-            // Force repaint
-            void title.offsetWidth;
+//             // Force repaint
+//             void title.offsetWidth;
 
-            // Restore transition
-            title.style.transition = "transform .8s cubic-bezier(.22,.61,.36,1), opacity .8s ease";
-            video.style.transition = "transform .8s cubic-bezier(.22,.61,.36,1), opacity .8s ease";
+//             // Restore transition
+//             title.style.transition = "transform .8s cubic-bezier(.22,.61,.36,1), opacity .8s ease";
+//             video.style.transition = "transform .8s cubic-bezier(.22,.61,.36,1), opacity .8s ease";
 
-            requestAnimationFrame(() => {
+//             requestAnimationFrame(() => {
 
-                // ONLY NEW CONTENT COMES FROM RIGHT
-                title.style.transform = "translateX(0)";
-                title.style.opacity = "1";
+//                 // ONLY NEW CONTENT COMES FROM RIGHT
+//                 title.style.transform = "translateX(0)";
+//                 title.style.opacity = "1";
 
-                video.style.transform = "translateX(0)";
-                video.style.opacity = "1";
+//                 video.style.transform = "translateX(0)";
+//                 video.style.opacity = "1";
 
-            });
+//             });
 
-        }, 400);
+//         }, 400);
 
-    });
+//     });
 
-});
+// });
 
 
 
-// last section tabbers cards js start from hre
-const capCards = document.querySelectorAll(".cap-card");
+// // last section tabbers cards js start from hre
+// const capCards = document.querySelectorAll(".cap-card");
 
-capCards.forEach(card => {
+// capCards.forEach(card => {
 
-    card.querySelector(".cap-toggle").addEventListener("click", () => {
+//     card.querySelector(".cap-toggle").addEventListener("click", () => {
 
-        capCards.forEach(item => {
+//         capCards.forEach(item => {
 
-            if(item !== card){
-                item.classList.remove("active");
-            }
+//             if(item !== card){
+//                 item.classList.remove("active");
+//             }
 
-        });
+//         });
 
-        card.classList.toggle("active");
+//         card.classList.toggle("active");
 
-    });
+//     });
 
-});
+// });
 
-// end here 
+// // end here 
 
 
-// partner section js start from here
-const cards = document.querySelectorAll(".partner-card");
+// // partner section js start from here
+// const cards = document.querySelectorAll(".partner-card");
 
-/* EXPAND BUTTON */
-cards.forEach(card => {
+// /* EXPAND BUTTON */
+// cards.forEach(card => {
 
-    const btn = card.querySelector(".expand-btn");
+//     const btn = card.querySelector(".expand-btn");
 
-    btn.addEventListener("click", (e) => {
+//     btn.addEventListener("click", (e) => {
 
-        e.stopPropagation();
+//         e.stopPropagation();
 
-        if(card.classList.contains("active")){
+//         if(card.classList.contains("active")){
 
-            card.classList.remove("active");
+//             card.classList.remove("active");
 
-            cards.forEach(other => {
-                other.classList.remove("hide");
-            });
+//             cards.forEach(other => {
+//                 other.classList.remove("hide");
+//             });
 
-            return;
-        }
+//             return;
+//         }
 
-        cards.forEach(other => {
+//         cards.forEach(other => {
 
-            other.classList.remove("active");
-            other.classList.remove("hide");
+//             other.classList.remove("active");
+//             other.classList.remove("hide");
 
-        });
+//         });
 
-        card.classList.add("active");
+//         card.classList.add("active");
 
-        cards.forEach(other => {
+//         cards.forEach(other => {
 
-            if(other !== card){
-                other.classList.add("hide");
-            }
+//             if(other !== card){
+//                 other.classList.add("hide");
+//             }
 
-        });
+//         });
 
-    });
+//     });
 
-    /* CLICK ACTIVE CARD TO CLOSE */
-    card.addEventListener("click", (e) => {
+//     /* CLICK ACTIVE CARD TO CLOSE */
+//     card.addEventListener("click", (e) => {
 
-        if(
-            card.classList.contains("active") &&
-            !e.target.closest(".expand-btn")
-        ){
+//         if(
+//             card.classList.contains("active") &&
+//             !e.target.closest(".expand-btn")
+//         ){
 
-            card.classList.remove("active");
+//             card.classList.remove("active");
 
-            cards.forEach(other => {
-                other.classList.remove("hide");
-            });
+//             cards.forEach(other => {
+//                 other.classList.remove("hide");
+//             });
 
-        }
+//         }
 
-    });
+//     });
 
-});
+// });
 
-/* CLICK OUTSIDE */
-document.addEventListener("click", (e) => {
+// /* CLICK OUTSIDE */
+// document.addEventListener("click", (e) => {
 
-    if(!e.target.closest(".partner-card")){
+//     if(!e.target.closest(".partner-card")){
 
-        cards.forEach(card => {
+//         cards.forEach(card => {
 
-            card.classList.remove("active");
-            card.classList.remove("hide");
+//             card.classList.remove("active");
+//             card.classList.remove("hide");
 
-        });
+//         });
 
-    }
+//     }
 
-});
+// });
 
 
 
-// end here
+// // end here
 
 // navbar js start from here
 const menuBtn = document.querySelector(".menu-btn");
