@@ -593,6 +593,28 @@ ANIMATIONS
    HERO TITLE
 ========================================== */
 
+/* new adde css */
+.img-card{
+    display:none;
+    width:100%;
+    height:100%;
+    object-fit:cover;
+}
+
+.packaging-intro-video-wrapper{
+    position:absolute;
+    inset:0;
+    z-index:5;
+}
+
+.packaging-intro-video{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+}
+
+/* end here */
+
 .title-wrap{
     position:absolute;
     inset:0;
