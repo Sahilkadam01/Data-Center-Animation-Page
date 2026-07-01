@@ -85,115 +85,208 @@
 
 <section class="asic-section" id="asic-section">
 
-<div class="asic-content">
-    <div class="tab-title">
-    <h2 class="asic-title">
-        Custom ASIC Design
-    </h2>
-</div>
-    <div class="asic-tabs">
-<button
-    class="tab active"
-    data-type="video"
-    data-video="/assets/videos/video.mp4"
-    data-title="Custom ASIC Design">
-    01
-</button>
+    <!-- ==========================
+         TOP CONTENT
+    =========================== -->
 
-<button
-    class="tab"
-    data-type="video"
-    data-video="/assets/videos/video2.mp4"
-    data-title="AI Accelerator">
-    02
-</button>
+    <div class="asic-content">
 
-<button
-    class="tab"
-    data-type="image"
-    data-image="./assets/images/img3.jpg"
-    data-title="Networking Silicon">
-    03
-</button>
+        <div class="tab-title">
 
-<button
-    class="tab"
-    data-type="card"
-    data-title="Advanced Packaging"
-    data-card-title="Chiplet Design"
-    data-card-description="This card contains any HTML content you want.">
-    04
-</button>
+            <h2 class="asic-title">
+                Custom ASIC Design
+            </h2>
 
-<button
-    class="tab"
-    data-type="card"
-    data-title="Custom Crads"
-
-    data-card1-title="2.5D"
-    data-card1-desc="High bandwidth"
-
-    data-card2-title="3D"
-    data-card2-desc="Vertical stacking"
-
-    data-card3-title="CoWoS"
-    data-card3-desc="Advanced packaging">
-
-    05
-
-</button>
-
-</div>
-
-</div>
-
-
-<div class="media-wrapper">
-
-    <!-- VIDEO -->
-    <video
-        class="asic-video"
-        muted
-        playsinline
-        loop
-        preload="metadata">
-
-        <source src="/assets/videos/video.mp4" type="video/mp4">
-
-    </video>
-
-    <!-- IMAGE -->
-    <img
-        class="asic-image"
-        src="./assets/images/img3.jpg"
-        alt="ASIC Image">
-
-
-        <div class="asic-card">
-
-            <div class="card-item">
-                <h3 class="card1-title">Early node adoption
-                    </h3>
-                <p class="card1-desc">MediaTek is at the cutting edge of process technology with 10-tape-outs on N3, 2+ on N2, and our first A14 test chip aping out later this year</p>
-            </div>
-        
-            <div class="card-item">
-                <h3 class="card2-title">Design-Technology Co-Optimization (DTCO)
-                    </h3>
-                <p class="card2-desc">Through DTCO, we work directly with leading fabs SOTA process nodes to tweak the process and customize, optimize transistors</p>
-            </div>
-        
-            <div class="card-item">
-                <h3 class="card3-title">Compute Efficiency Through Lower Voltage Operation
-                    </h3>
-                <p class="card3-desc">MediaTek's extensive mobile experience gives us a significant head start in applying these learnings to data center chips</p>
-            </div>
-        
         </div>
 
-</div>
+        <div class="asic-tabs">
+
+            <button class="tab active">
+                01
+            </button>
+
+            <button class="tab">
+                02
+            </button>
+
+            <button class="tab">
+                03
+                
+            </button>
+
+           
+
+        </div>
+
+    </div>
 
 
+    <!-- ==========================
+         MEDIA WRAPPER
+    =========================== -->
+
+    <div class="media-wrapper">
+
+        <!-- =====================================================
+             SLIDE 1 : VIDEO
+        ====================================================== -->
+
+        <div class="asic-slide active">
+
+            <video
+                class="asic-video"
+                muted
+                playsinline
+                loop
+                autoplay
+                preload="auto">
+                
+                <source
+                    src="./assets/videos/Custom-ASIC-design.mp4"
+                    type="video/mp4">
+
+            </video>
+
+        </div>
+
+
+        <!-- =====================================================
+             SLIDE 2 : VIDEO
+        ====================================================== -->
+
+        <div class="asic-slide">
+
+            <video
+                class="asic-video"
+                muted
+                playsinline
+                loop
+                autoplay
+                preload="auto">
+
+                <source
+                    src="./assets/videos/Custom-Proprietary-Technology-Integration.mp4"
+                    type="video/mp4">
+
+            </video>
+
+        </div>
+
+
+        <!-- =====================================================
+             SLIDE 3 : IMAGE
+        ====================================================== -->
+
+        <!-- <div class="asic-slide">
+
+            <img
+                class="asic-image"
+                src="./assets/images/image1.jpg"
+                alt="ASIC Image">
+
+        </div> -->
+
+
+        <!-- =====================================================
+             SLIDE 4 : CARD
+        ====================================================== -->
+
+        <div class="asic-slide">
+
+            <div class="asic-card">
+
+                <div class="card-item">
+
+                    <div class="card-img">
+                        <img src="./assets/images/1.Early node adoption.svg">
+                     </div>
+
+                    <h3>
+                        Early Node Adoption
+                    </h3>
+
+                    <p>
+                        MediaTek is at the cutting edge of process
+                        technology with multiple tape-outs.
+                    </p>
+
+                </div>
+
+                <div class="card-item">
+
+                    <div class="card-img">
+                        <img src="./assets/images/2.Design-Technology Co-Optimization (DTCO).svg">
+                     </div>
+
+                    <h3>
+                        .Design-Technology Co-Optimization (DTCO)
+                    </h3>
+
+                    <p>
+                        Design Technology Co-Optimization
+                        with leading fabs.
+                    </p>
+
+                </div>
+
+                <div class="card-item">
+
+                    <div class="card-img">
+                        <img src="./assets/images/3.Compute Efficiency Through Lower Voltage Operation.svg">
+                     </div>
+
+                    <h3>
+                        Compute Efficiency Through Lower Voltage Operation
+                    </h3>
+
+                    <p>
+                        Lower voltage operation
+                        for better performance.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- =====================================================
+             SLIDE 5 : CUSTOM CONTENT
+        ====================================================== -->
+
+        <!-- <div class="asic-slide">
+
+            <div class="custom-layout">
+
+                <div class="left">
+
+                    <h2>
+                        Any HTML
+                    </h2>
+
+                    <p>
+
+                        You can place anything here.
+
+                    </p>
+
+                </div>
+
+                <div class="right">
+
+                    <img
+                        src="./assets/images/image2.jpg"
+                        alt="">
+
+                </div>
+
+            </div>
+
+        </div> -->
+
+
+    </div>
 
 </section>
 
