@@ -601,10 +601,47 @@ ANIMATIONS
     object-fit:cover;
 }
 
+
+.packaging-intro-video-wrapper.shrink{
+
+    width:min(48vw,700px);
+
+    height:min(60vh,500px);
+
+    left:72%;
+
+    top:40%;
+
+    transform:translate(-48%,-50%);
+
+    border-radius:24px;
+
+}
+
 .packaging-intro-video-wrapper{
+
     position:absolute;
-    inset:0;
-    z-index:5;
+
+    left:50%;
+    top:50%;
+
+    width:100vw;
+    height:100vh;
+
+    transform:translate(-50%,-50%);
+
+    overflow:hidden;
+
+    z-index:20;
+
+    transition:
+        width .9s cubic-bezier(.87,0,.13,1),
+        height .9s cubic-bezier(.87,0,.13,1),
+        left .9s cubic-bezier(.87,0,.13,1),
+        top .9s cubic-bezier(.87,0,.13,1),
+        transform .9s cubic-bezier(.87,0,.13,1),
+        border-radius .9s cubic-bezier(.87,0,.13,1);
+
 }
 
 .packaging-intro-video{
@@ -655,54 +692,6 @@ ANIMATIONS
 
     text-align:center;
 }
-
-/* .packaging-section:has(.packaging-video-wrapper.active.shrink) .title-warp {
-   display: none;
-} */
-
-/* .packaging-hero-title{
-
-    position:relative;
-
-    top:50%;
-    left:50%;
-
-    transform:translate(-50%,-50%) scale(.8);
-
-    margin:0;
-
-    width:90%;
-
-    text-align:center;
-
-    color:#fff;
-
-    font-size:clamp(40px,7vw,110px);
-
-    font-family:'Riona Sans Light';
-
-    opacity:1;
-
-    z-index:999;
-
-    pointer-events:none;
-
-    transition:
-    transform 1.2s cubic-bezier(.22,.61,.36,1),
-    opacity .8s ease;
-} */
-
-
-
-
-
-
-
-
-
-
-
-
 
 /* end here  */
 
