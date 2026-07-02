@@ -1,77 +1,38 @@
-<section class="asic-section">
+.card-item card-item {
+        height: 100%;
+        position: relative;
+        flex: 0.5;
+        display: flex;
 
-    <div class="asic-content">
-
-        <h2 class="asic-title">
-            {{ module.section_title }}
-        </h2>
-
-        <div class="asic-tabs">
-
-            {% for item in module.slides %}
-
-                <button class="tab {% if loop.first %}active{% endif %}">
-                    {{ "%02d"|format(loop.index) }}
-                </button>
-
-            {% endfor %}
-
-        </div>
-
-    </div>
-
-
-    <div class="media-wrapper">
-
-        {% for item in module.slides %}
-
-        <div class="asic-slide {% if loop.first %}active{% endif %}">
-
-            {% if item.type == "video" %}
-
-                <video
-                    class="asic-video"
-                    muted
-                    playsinline
-                    loop>
-
-                    <source
-                        src="{{ item.video }}"
-                        type="video/mp4">
-
-                </video>
-
-            {% elif item.type == "image" %}
-
-                <img
-                    class="asic-image"
-                    src="{{ item.image }}"
-                    alt="">
-
-            {% elif item.type == "card" %}
-
-                <div class="asic-card">
-
-                    {% for card in item.cards %}
-
-                        <div class="card-item">
-
-                            <h3>{{ card.title }}</h3>
-
-                            <p>{{ card.description }}</p>
-
-                        </div>
-
-                    {% endfor %}
-
-                </div>
-
-            {% endif %}
-
-        </div>
-
-        {% endfor %}
-
-    </div>
-
-</section>
+        flex-direction: column;
+        background-position: center;
+        transition: flex 2s ease-out;
+      }
+      .card-item p {
+        flex: 1;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        transition: all 1s ease;
+      }
+      .card-item p:first-child {
+        transform: translateY(-100%);
+      }
+      .card-item p:last-child {
+        transform: translateY(100%);
+      }
+      .card-item active {
+        flex: 5;
+      }
+      .card-item active p:first-child {
+        transform: translateY(0);
+      }
+      .card-item active p:last-child {
+        transform: translateY(0);
+      }
+      p {
+        text-transform: uppercase;
+        color: white;
+        font-size: 50px;
+        font-family: "Anton", sans-serif;
+      }

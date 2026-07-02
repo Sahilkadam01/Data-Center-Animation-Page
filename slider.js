@@ -139,3 +139,47 @@ document.querySelectorAll(".read-more-btn").forEach(btn => {
 });
 
 
+
+const cardContainer = document.querySelector(".asic-card");
+
+if (cardContainer) {
+
+    const cards = cardContainer.querySelectorAll(".card-item");
+
+    cards.forEach(card => {
+
+        card.addEventListener("click", () => {
+
+            // Collapse
+            if (card.classList.contains("active")) {
+
+                // Step 1: remove active only
+                card.classList.remove("active");
+
+                // Step 2: after active card shrinks,
+                // restore the other cards
+                setTimeout(() => {
+
+                    cardContainer.classList.remove("has-active");
+
+                }, 280);
+
+                return;
+            }
+
+            // Expand
+            cards.forEach(c => c.classList.remove("active"));
+
+            cardContainer.classList.add("has-active");
+
+            requestAnimationFrame(() => {
+
+                card.classList.add("active");
+
+            });
+
+        });
+
+    });
+
+}

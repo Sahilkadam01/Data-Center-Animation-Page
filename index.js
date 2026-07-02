@@ -1,231 +1,106 @@
 document.addEventListener("DOMContentLoaded", () => {
 
-//   const section = document.querySelector(".asic-section");
-//   const wrapper = document.querySelector(".video-wrapper");
-//   const video = document.querySelector(".asic-video");
-//   const content = document.querySelector(".asic-content");
+// last section tabbers cards js start from hre
+const capCards = document.querySelectorAll(".cap-card");
 
-//   let triggered = false;
+capCards.forEach(card => {
 
-//   // SECTION ANIMATION
-//   function activate() {
+    card.querySelector(".cap-toggle").addEventListener("click", () => {
 
-//       if (triggered) return;
+        capCards.forEach(item => {
 
-//       triggered = true;
+            if(item !== card){
+                item.classList.remove("active");
+            }
 
-//       video.play().catch(() => {});
+        });
 
-//       setTimeout(() => {
+        card.classList.toggle("active");
 
-//           wrapper.classList.add("shrink");
+    });
 
-//           setTimeout(() => {
-//               content.classList.add("show");
-//           }, 500);
+});
 
-//       }, 300);
+// end here 
 
-//   }
 
-//   const observer = new IntersectionObserver((entries) => {
+// partner section js start from here
+const cards = document.querySelectorAll(".partner-card");
 
-//       entries.forEach(entry => {
+/* EXPAND BUTTON */
+cards.forEach(card => {
 
-//           if (entry.isIntersecting) {
+    const btn = card.querySelector(".expand-btn");
 
-//               activate();
+    btn.addEventListener("click", (e) => {
 
-//           } else {
+        e.stopPropagation();
 
-//               triggered = false;
+        if(card.classList.contains("active")){
 
-//               wrapper.classList.remove("shrink");
-//               content.classList.remove("show");
+            card.classList.remove("active");
 
-//           }
+            cards.forEach(other => {
+                other.classList.remove("hide");
+            });
 
-//       });
+            return;
+        }
 
-//   }, {
-//       threshold: 0.6
-//   });
+        cards.forEach(other => {
 
-//   observer.observe(section);
+            other.classList.remove("active");
+            other.classList.remove("hide");
 
-//   // TAB SWITCHER
-//   const tabs = document.querySelectorAll(".tab");
-//   const title = document.querySelector(".asic-title");
+        });
 
-//   tabs.forEach(tab => {
+        card.classList.add("active");
 
-//     tab.addEventListener("click", () => {
+        cards.forEach(other => {
 
-//         if (tab.classList.contains("active")) return;
+            if(other !== card){
+                other.classList.add("hide");
+            }
 
-//         tabs.forEach(btn => btn.classList.remove("active"));
-//         tab.classList.add("active");
+        });
 
-//         const newTitle = tab.dataset.title;
-//         const newVideo = tab.dataset.video;
+    });
 
-//         // OLD CONTENT ONLY GOES LEFT
-//         title.style.transform = "translateX(-300px)";
-//         title.style.opacity = "0";
+    /* CLICK ACTIVE CARD TO CLOSE */
+    card.addEventListener("click", (e) => {
 
-//         video.style.transform = "translateX(-300px)";
-//         video.style.opacity = "0";
+        if(
+            card.classList.contains("active") &&
+            !e.target.closest(".expand-btn")
+        ){
 
-//         setTimeout(() => {
+            card.classList.remove("active");
 
-//             title.textContent = newTitle;
+            cards.forEach(other => {
+                other.classList.remove("hide");
+            });
 
-//             const source = video.querySelector("source");
+        }
 
-//             if (source) {
-//                 source.src = newVideo;
-//             }
+    });
 
-//             video.load();
-//             video.play().catch(() => {});
+});
 
-//             // NEW CONTENT STARTS FROM RIGHT
-//             title.style.transition = "none";
-//             video.style.transition = "none";
+/* CLICK OUTSIDE */
+document.addEventListener("click", (e) => {
 
-//             title.style.transform = "translateX(300px)";
-//             title.style.opacity = "0";
+    if(!e.target.closest(".partner-card")){
 
-//             video.style.transform = "translateX(300px)";
-//             video.style.opacity = "0";
+        cards.forEach(card => {
 
-//             // Force repaint
-//             void title.offsetWidth;
+            card.classList.remove("active");
+            card.classList.remove("hide");
 
-//             // Restore transition
-//             title.style.transition = "transform .8s cubic-bezier(.22,.61,.36,1), opacity .8s ease";
-//             video.style.transition = "transform .8s cubic-bezier(.22,.61,.36,1), opacity .8s ease";
+        });
 
-//             requestAnimationFrame(() => {
+    }
 
-//                 // ONLY NEW CONTENT COMES FROM RIGHT
-//                 title.style.transform = "translateX(0)";
-//                 title.style.opacity = "1";
-
-//                 video.style.transform = "translateX(0)";
-//                 video.style.opacity = "1";
-
-//             });
-
-//         }, 400);
-
-//     });
-
-// });
-
-
-
-// // last section tabbers cards js start from hre
-// const capCards = document.querySelectorAll(".cap-card");
-
-// capCards.forEach(card => {
-
-//     card.querySelector(".cap-toggle").addEventListener("click", () => {
-
-//         capCards.forEach(item => {
-
-//             if(item !== card){
-//                 item.classList.remove("active");
-//             }
-
-//         });
-
-//         card.classList.toggle("active");
-
-//     });
-
-// });
-
-// // end here 
-
-
-// // partner section js start from here
-// const cards = document.querySelectorAll(".partner-card");
-
-// /* EXPAND BUTTON */
-// cards.forEach(card => {
-
-//     const btn = card.querySelector(".expand-btn");
-
-//     btn.addEventListener("click", (e) => {
-
-//         e.stopPropagation();
-
-//         if(card.classList.contains("active")){
-
-//             card.classList.remove("active");
-
-//             cards.forEach(other => {
-//                 other.classList.remove("hide");
-//             });
-
-//             return;
-//         }
-
-//         cards.forEach(other => {
-
-//             other.classList.remove("active");
-//             other.classList.remove("hide");
-
-//         });
-
-//         card.classList.add("active");
-
-//         cards.forEach(other => {
-
-//             if(other !== card){
-//                 other.classList.add("hide");
-//             }
-
-//         });
-
-//     });
-
-//     /* CLICK ACTIVE CARD TO CLOSE */
-//     card.addEventListener("click", (e) => {
-
-//         if(
-//             card.classList.contains("active") &&
-//             !e.target.closest(".expand-btn")
-//         ){
-
-//             card.classList.remove("active");
-
-//             cards.forEach(other => {
-//                 other.classList.remove("hide");
-//             });
-
-//         }
-
-//     });
-
-// });
-
-// /* CLICK OUTSIDE */
-// document.addEventListener("click", (e) => {
-
-//     if(!e.target.closest(".partner-card")){
-
-//         cards.forEach(card => {
-
-//             card.classList.remove("active");
-//             card.classList.remove("hide");
-
-//         });
-
-//     }
-
-// });
+});
 
 
 

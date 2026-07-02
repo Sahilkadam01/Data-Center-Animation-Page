@@ -1,654 +1,258 @@
-// document.addEventListener("DOMContentLoaded", () => {
-
-//     /* ==========================================
-//        ELEMENTS
-//     ========================================== */
-
-//     const section =
-//     document.querySelector(".asic-section");
-
-//     if (!section) return;
-
-//     const wrapper =
-//     section.querySelector(".media-wrapper");
-
-//     const video =
-//     section.querySelector(".asic-video");
-
-//     const image =
-//     section.querySelector(".asic-image");
-
-//     const card =
-//     section.querySelector(".asic-card");
-
-//     const content =
-//     section.querySelector(".asic-content");
-
-//     const title =
-//     section.querySelector(".asic-title");
-
-//     const tabs =
-//     section.querySelectorAll(".tab");
-
-//     const source =
-//     video.querySelector("source");
-
-//     let triggered = false;
-
-//     /* ==========================================
-//        SHOW MEDIA
-//     ========================================== */
-
-//     function hideAllMedia() {
-
-//         video.pause();
-
-//         video.style.display = "none";
-
-//         image.style.display = "none";
-
-//         card.style.display = "none";
-
-//     }
-
-//     function playVideo(src) {
-
-//         hideAllMedia();
-
-//         video.style.display = "block";
-
-//         source.src = src;
-
-//         video.load();
-
-//         video.currentTime = 0;
-
-//         video.play().catch(() => {});
-
-//     }
-
-//     function showImage(src) {
-
-//         hideAllMedia();
-
-//         image.style.display = "block";
-
-//         image.src = src;
-
-//     }
-
-//     function showCard(tab) {
-
-//         hideAllMedia();
-
-//         card.style.display = "flex";
-
-//         /* Multiple Cards */
-
-//         if (tab.dataset.card1Title) {
-
-//             card.querySelector(".card1-title").textContent =
-//             tab.dataset.card1Title;
-
-//             card.querySelector(".card1-desc").textContent =
-//             tab.dataset.card1Desc;
-
-//             card.querySelector(".card2-title").textContent =
-//             tab.dataset.card2Title;
-
-//             card.querySelector(".card2-desc").textContent =
-//             tab.dataset.card2Desc;
-
-//             card.querySelector(".card3-title").textContent =
-//             tab.dataset.card3Title;
-
-//             card.querySelector(".card3-desc").textContent =
-//             tab.dataset.card3Desc;
-
-//         }
-
-//         /* Single Card */
-
-//         else if (tab.dataset.cardTitle) {
-
-//             card.querySelector(".card1-title").textContent =
-//             tab.dataset.cardTitle;
-
-//             card.querySelector(".card1-desc").textContent =
-//             tab.dataset.cardDescription;
-
-//         }
-
-//     }
-
-//     /* ==========================================
-//        SECTION ENTRY
-//     ========================================== */
-
-//     function activate() {
-
-//         if (triggered) return;
-
-//         triggered = true;
-
-//         const activeTab =
-//         section.querySelector(".tab.active");
-
-//         if (!activeTab) return;
-
-//         switch (activeTab.dataset.type) {
-
-//             case "video":
-
-//                 playVideo(activeTab.dataset.video);
-
-//                 break;
-
-//             case "image":
-
-//                 showImage(activeTab.dataset.image);
-
-//                 break;
-
-//             case "card":
-
-//                 showCard(activeTab);
-
-//                 break;
-
-//         }
-
-//         setTimeout(() => {
-
-//             wrapper.classList.add("shrink");
-
-//             setTimeout(() => {
-
-//                 content.classList.add("show");
-
-//             }, 500);
-
-//         }, 300);
-
-//     }
-//     /* ==========================================
-//        INTERSECTION OBSERVER
-//     ========================================== */
-
-//     const observer = new IntersectionObserver((entries) => {
-
-//         entries.forEach(entry => {
-
-//             if (entry.isIntersecting) {
-
-//                 activate();
-
-//             } else {
-
-//                 triggered = false;
-
-//                 /* -------------------------
-//                    Reset Section
-//                 ------------------------- */
-
-//                 wrapper.classList.remove("shrink");
-
-//                 content.classList.remove("show");
-
-//                 /* -------------------------
-//                    Stop Video
-//                 ------------------------- */
-
-//                 video.pause();
-
-//                 video.currentTime = 0;
-
-//                 /* -------------------------
-//                    Reset Media
-//                 ------------------------- */
-
-//                 hideAllMedia();
-
-//                 image.removeAttribute("src");
-
-//                 /* -------------------------
-//                    Reset Tabs
-//                 ------------------------- */
-
-//                 tabs.forEach((tab, index) => {
-
-//                     tab.classList.remove("active");
-
-//                     if (index === 0) {
-
-//                         tab.classList.add("active");
-
-//                     }
-
-//                 });
-
-//                 /* -------------------------
-//                    Reset Title
-//                 ------------------------- */
-
-//                 if (tabs.length) {
-
-//                     title.textContent =
-//                     tabs[0].dataset.title;
-
-//                 }
-
-//                 /* -------------------------
-//                    Restore First Tab
-//                 ------------------------- */
-
-//                 const firstTab = tabs[0];
-
-//                 if (firstTab) {
-
-//                     switch (firstTab.dataset.type) {
-
-//                         case "video":
-
-//                             playVideo(firstTab.dataset.video);
-
-//                             break;
-
-//                         case "image":
-
-//                             showImage(firstTab.dataset.image);
-
-//                             break;
-
-//                         case "card":
-
-//                             showCard(firstTab);
-
-//                             break;
-
-//                     }
-
-//                 }
-
-//                 /* -------------------------
-//                    Reset Animation
-//                 ------------------------- */
-
-//                 title.style.transition = "";
-
-//                 title.style.transform = "translateX(0)";
-
-//                 title.style.opacity = "1";
-
-//                 video.style.transition = "";
-
-//                 video.style.transform = "translateX(0)";
-
-//                 video.style.opacity = "1";
-
-//                 image.style.transition = "";
-
-//                 image.style.transform = "translateX(0)";
-
-//                 image.style.opacity = "1";
-
-//                 card.style.transition = "";
-
-//                 card.style.transform = "translateX(0)";
-
-//                 card.style.opacity = "1";
-
-//             }
-
-//         });
-
-//     }, {
-
-//         threshold: 0.6
-
-//     });
-
-//     observer.observe(section);
-//     /* ==========================================
-//        TAB SWITCHER
-//     ========================================== */
-
-//     tabs.forEach(tab => {
-
-//         tab.addEventListener("click", () => {
-
-//             if (tab.classList.contains("active")) return;
-
-//             /* -------------------------
-//                Active Tab
-//             ------------------------- */
-
-//             tabs.forEach(btn => {
-
-//                 btn.classList.remove("active");
-
-//             });
-
-//             tab.classList.add("active");
-
-//             const type = tab.dataset.type;
-
-//             const newTitle = tab.dataset.title;
-
-//             /* -------------------------
-//                Current Media
-//             ------------------------- */
-
-//             let currentMedia = video;
-
-//             if (image.style.display === "block") {
-
-//                 currentMedia = image;
-
-//             }
-
-//             if (card.style.display === "flex") {
-
-//                 currentMedia = card;
-
-//             }
-
-//             /* Stop current video */
-
-//             if (video.style.display === "block") {
-
-//                 video.pause();
-
-//             }
-
-//             /* -------------------------
-//                Animate OUT
-//             ------------------------- */
-
-//             title.style.transform =
-//             "translateX(-300px)";
-
-//             title.style.opacity = "0";
-
-//             currentMedia.style.transform =
-//             "translateX(-300px)";
-
-//             currentMedia.style.opacity = "0";
-
-//             setTimeout(() => {
-
-//                 /* -------------------------
-//                    Update Title
-//                 ------------------------- */
-
-//                 title.textContent = newTitle;
-
-//                 /* -------------------------
-//                    Switch Media
-//                 ------------------------- */
-
-//                 if (type === "video") {
-
-//                     playVideo(tab.dataset.video);
-
-//                 }
-
-//                 else if (type === "image") {
-
-//                     showImage(tab.dataset.image);
-
-//                 }
-
-//                 else if (type === "card") {
-
-//                     showCard(tab);
-
-//                 }
-
-//                 /* -------------------------
-//                    Get Active Media
-//                 ------------------------- */
-
-//                 let nextMedia = video;
-
-//                 if (type === "image") {
-
-//                     nextMedia = image;
-
-//                 }
-
-//                 if (type === "card") {
-
-//                     nextMedia = card;
-
-//                 }
-
-//                 /* -------------------------
-//                    Start From Right
-//                 ------------------------- */
-
-//                 title.style.transition = "none";
-
-//                 nextMedia.style.transition = "none";
-
-//                 title.style.transform =
-//                 "translateX(300px)";
-
-//                 title.style.opacity = "0";
-
-//                 nextMedia.style.transform =
-//                 "translateX(300px)";
-
-//                 nextMedia.style.opacity = "0";
-//                 /* -------------------------
-//                    Force Repaint
-//                 ------------------------- */
-
-//                 void nextMedia.offsetWidth;
-
-//                 /* -------------------------
-//                    Restore Transition
-//                 ------------------------- */
-
-//                 title.style.transition =
-//                 "transform .8s cubic-bezier(.22,.61,.36,1), opacity .8s ease";
-
-//                 nextMedia.style.transition =
-//                 "transform .8s cubic-bezier(.22,.61,.36,1), opacity .8s ease";
-
-//                 requestAnimationFrame(() => {
-
-//                     title.style.transform =
-//                     "translateX(0)";
-
-//                     title.style.opacity =
-//                     "1";
-
-//                     nextMedia.style.transform =
-//                     "translateX(0)";
-
-//                     nextMedia.style.opacity =
-//                     "1";
-
-//                 });
-
-//                 /* -------------------------
-//                    Play Video if Active
-//                 ------------------------- */
-
-//                 if (type === "video") {
-
-//                     video.currentTime = 0;
-
-//                     video.play().catch(() => {});
-
-//                 }
-
-//             }, 400);
-
-//         });
-
-//     });
-
-// });
-
-
-
-// //////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
 document.addEventListener("DOMContentLoaded", () => {
 
-    /* ==========================================
+    /* ==========================================================
        ELEMENTS
-    ========================================== */
+    ========================================================== */
 
-    const section =
-    document.querySelector(".asic-section");
+    const section = document.querySelector(".asic-section");
 
     if (!section) return;
 
-    const wrapper =
-    section.querySelector(".media-wrapper");
+    const wrapper = section.querySelector(".media-wrapper");
 
-    const content =
-    section.querySelector(".asic-content");
+    const content = section.querySelector(".asic-content");
 
-    const title =
-    section.querySelector(".asic-title");
+    const title = section.querySelector(".asic-title");
 
-    const tabs =
-    section.querySelectorAll(".tab");
+    const subtitle = section.querySelector(".asic-subtitle");
 
-    const slides =
-    section.querySelectorAll(".asic-slide");
+    const description = section.querySelector(".asic-desc");
 
-    let triggered = false;
+    const tabs = section.querySelectorAll(".tab");
+
+    const slides = section.querySelectorAll(".asic-slide");
 
     let currentIndex = 0;
 
+    let triggered = false;
+
+
+
+    /* ==========================================================
+       INITIAL STATE
+    ========================================================== */
+
+    slides.forEach((slide, index) => {
+
+        slide.classList.remove("active");
+
+        if (index === 0) {
+
+            slide.classList.add("active");
+
+        }
+
+    });
+
+    tabs.forEach((tab, index) => {
+
+        tab.classList.remove("active");
+
+        if (index === 0) {
+
+            tab.classList.add("active");
+
+        }
+
+    });
+
+
+
+    /* ==========================================================
+       COPY CONTENT FROM FIRST SLIDE
+    ========================================================== */
+
+    updateContent(slides[0]);
+
+
+
+    /* ==========================================================
+       AUTOPLAY FIRST VIDEO
+    ========================================================== */
+
     const firstVideo = slides[0].querySelector("video");
 
-if (firstVideo) {
+    if (firstVideo) {
 
-    firstVideo.play().catch(() => {});
+        firstVideo.muted = true;
 
-}
+        firstVideo.play().catch(() => {});
 
-    /* ==========================================
-       SECTION ENTRY
-    ========================================== */
-
-    function activate() {
-
-        if (triggered) return;
-    
-        triggered = true;
-    
-        // Ensure current slide is visible
-        slides[currentIndex].classList.add("active");
-    
-        // Resume video only if paused
-        const video = slides[currentIndex].querySelector("video");
-    
-        if (video && video.paused) {
-    
-            video.play().catch(() => {});
-    
-        }
-    
-        setTimeout(() => {
-    
-            wrapper.classList.add("shrink");
-    
-            setTimeout(() => {
-    
-                content.classList.add("show");
-    
-            }, 500);
-    
-        }, 300);
-    
     }
 
-    /* ==========================================
-       INTERSECTION OBSERVER
-    ========================================== */
 
-    const observer = new IntersectionObserver((entries) => {
 
-        entries.forEach(entry => {
-    
-            if (entry.isIntersecting) {
-    
-                activate();
-    
-            } else {
-    
-                triggered = false;
-    
-                wrapper.classList.remove("shrink");
-    
-                content.classList.remove("show");
-    
-                // DON'T stop videos
-                // DON'T reset slides
-                // DON'T reset tabs
-    
-            }
-    
-        });
-    
-    }, {
-    
-        threshold: 0.6
-    
-    });
-    
-    observer.observe(section);
-    /* ==========================================
-       HELPER FUNCTIONS
-    ========================================== */
+    /* ==========================================================
+       UPDATE TITLE / SUBTITLE / DESCRIPTION
+    ========================================================== */
+
+    function updateContent(slide) {
+
+        const data = slide.querySelector(".slide-content");
+
+        if (!data) return;
+
+        const slideTitle =
+            data.querySelector(".slide-title");
+
+        const slideSubtitle =
+            data.querySelector(".slide-subtitle");
+
+        const slideDesc =
+            data.querySelector(".slide-description");
+
+        if (slideTitle) {
+
+            title.innerHTML = slideTitle.innerHTML;
+
+        }
+
+        if (slideSubtitle) {
+
+            subtitle.innerHTML = slideSubtitle.innerHTML;
+
+        }
+
+        if (slideDesc) {
+
+            description.innerHTML = slideDesc.innerHTML;
+
+        }
+
+    }
+
+
+
+    /* ==========================================================
+       STOP ALL VIDEOS
+    ========================================================== */
 
     function stopAllVideos() {
 
         slides.forEach(slide => {
 
-            const video =
-            slide.querySelector("video");
+            const video = slide.querySelector("video");
 
-            if (video) {
+            if (!video) return;
 
-                video.pause();
+            video.pause();
 
-                video.currentTime = 0;
-
-            }
+            video.currentTime = 0;
 
         });
 
     }
 
+
+
+    /* ==========================================================
+       PLAY VIDEO OF ACTIVE SLIDE
+    ========================================================== */
+
     function playVideo(slide) {
 
         stopAllVideos();
-    
+
         const video = slide.querySelector("video");
-    
+
         if (!video) return;
-    
+
         video.currentTime = 0;
-    
+
         video.play().catch(() => {});
-    
+
+    }
+    /* ==========================================================
+       ACTIVATE SECTION
+    ========================================================== */
+
+    function activate() {
+
+        if (triggered) return;
+
+        triggered = true;
+
+        const currentSlide = slides[currentIndex];
+
+        currentSlide.classList.add("active");
+
+        updateContent(currentSlide);
+
+        const video = currentSlide.querySelector("video");
+
+        if (video && video.paused) {
+
+            video.play().catch(() => {});
+
+        }
+
+        setTimeout(() => {
+
+            wrapper.classList.add("shrink");
+
+            setTimeout(() => {
+
+                content.classList.add("show");
+
+            }, 500);
+
+        }, 300);
+
     }
 
+
+
+    /* ==========================================================
+       RESET SECTION
+    ========================================================== */
+
+    function resetSection() {
+
+        triggered = false;
+
+        wrapper.classList.remove("shrink");
+
+        content.classList.remove("show");
+
+    }
+
+
+
+    /* ==========================================================
+       INTERSECTION OBSERVER
+    ========================================================== */
+
+    const observer = new IntersectionObserver((entries) => {
+
+        entries.forEach(entry => {
+
+            if (entry.isIntersecting) {
+
+                activate();
+
+            } else {
+
+                resetSection();
+
+            }
+
+        });
+
+    }, {
+
+        threshold: 0.6
+
+    });
+
+    observer.observe(section);
+
+
+
+    /* ==========================================================
+       SHOW SLIDE
+    ========================================================== */
+
     function showSlide(index) {
-
-        /* Stop all playing videos */
-
-        stopAllVideos();
-
-        /* Hide every slide */
 
         slides.forEach(slide => {
 
@@ -656,36 +260,18 @@ if (firstVideo) {
 
         });
 
-        /* Show current slide */
-
         slides[index].classList.add("active");
 
-        /* Play video if this slide contains one */
+        updateContent(slides[index]);
 
         playVideo(slides[index]);
 
         currentIndex = index;
 
     }
-
-    function stopAllVideos() {
-
-    slides.forEach(slide => {
-
-        const video = slide.querySelector("video");
-
-        if (video) {
-
-            video.pause();
-
-        }
-
-    });
-
-}
-    /* ==========================================
+    /* ==========================================================
        TAB SWITCHER
-    ========================================== */
+    ========================================================== */
 
     tabs.forEach((tab, index) => {
 
@@ -693,112 +279,99 @@ if (firstVideo) {
 
             if (index === currentIndex) return;
 
-            tabs.forEach(btn => {
-
-                btn.classList.remove("active");
-
-            });
-
+            tabs.forEach(btn => btn.classList.remove("active"));
             tab.classList.add("active");
 
-            const currentSlide =
-            slides[currentIndex];
+            const currentSlide = slides[currentIndex];
+            const nextSlide = slides[index];
 
-            const nextSlide =
-            slides[index];
-            /* ==========================================
-               ANIMATE CURRENT SLIDE OUT
-            ========================================== */
+            /* ----------------------------------
+               Animate OUT
+            ---------------------------------- */
 
-            title.style.transform =
-            "translateX(-300px)";
+            title.style.transform = "translateX(-300px)";
+            subtitle.style.transform = "translateX(-300px)";
+            description.style.transform = "translateX(-300px)";
+            currentSlide.style.transform = "translateX(-300px)";
 
             title.style.opacity = "0";
-
-            currentSlide.style.transform =
-            "translateX(-300px)";
-
+            subtitle.style.opacity = "0";
+            description.style.opacity = "0";
             currentSlide.style.opacity = "0";
 
             setTimeout(() => {
 
-                /* Update title if each tab has a title */
-
-                if (tab.dataset.title) {
-
-                    title.textContent =
-                    tab.dataset.title;
-
-                }
-
-                /* Hide current slide */
+                /* ----------------------------------
+                   Hide Current Slide
+                ---------------------------------- */
 
                 currentSlide.classList.remove("active");
 
-                /* Prepare next slide */
+                /* ----------------------------------
+                   Show Next Slide
+                ---------------------------------- */
 
                 nextSlide.classList.add("active");
 
-                nextSlide.style.transition = "none";
-
-                nextSlide.style.transform =
-                "translateX(300px)";
-
-                nextSlide.style.opacity = "0";
-
-                title.style.transition = "none";
-
-                title.style.transform =
-                "translateX(300px)";
-
-                title.style.opacity = "0";
-
-                /* Force repaint */
-
-                void nextSlide.offsetWidth;
-
-                /* Restore transition */
-
-                nextSlide.style.transition =
-                "transform .8s cubic-bezier(.22,.61,.36,1), opacity .8s ease";
-
-                title.style.transition =
-                "transform .8s cubic-bezier(.22,.61,.36,1), opacity .8s ease";
-                /* ==========================================
-                   ANIMATE NEXT SLIDE IN
-                ========================================== */
-
-                requestAnimationFrame(() => {
-
-                    title.style.transform =
-                    "translateX(0)";
-
-                    title.style.opacity =
-                    "1";
-
-                    nextSlide.style.transform =
-                    "translateX(0)";
-
-                    nextSlide.style.opacity =
-                    "1";
-
-                });
-
-                /* ==========================================
-                   PLAY VIDEO IF PRESENT
-                ========================================== */
+                updateContent(nextSlide);
 
                 playVideo(nextSlide);
 
-                /* ==========================================
-                   RESET PREVIOUS SLIDE
-                ========================================== */
+                /* ----------------------------------
+                   Prepare Animation
+                ---------------------------------- */
 
-                currentSlide.style.transform = "";
+                nextSlide.style.transition = "none";
+                title.style.transition = "none";
+                subtitle.style.transition = "none";
+                description.style.transition = "none";
 
-                currentSlide.style.opacity = "";
+                nextSlide.style.transform = "translateX(300px)";
+                title.style.transform = "translateX(300px)";
+                subtitle.style.transform = "translateX(300px)";
+                description.style.transform = "translateX(300px)";
 
-                currentSlide.style.transition = "";
+                nextSlide.style.opacity = "0";
+                title.style.opacity = "0";
+                subtitle.style.opacity = "0";
+                description.style.opacity = "0";
+
+                void nextSlide.offsetWidth;
+
+                /* ----------------------------------
+                   Restore Transition
+                ---------------------------------- */
+
+                nextSlide.style.transition =
+                    "transform .8s cubic-bezier(.22,.61,.36,1), opacity .8s ease";
+
+                title.style.transition =
+                    "transform .8s cubic-bezier(.22,.61,.36,1), opacity .8s ease";
+
+                subtitle.style.transition =
+                    "transform .8s cubic-bezier(.22,.61,.36,1), opacity .8s ease";
+
+                description.style.transition =
+                    "transform .8s cubic-bezier(.22,.61,.36,1), opacity .8s ease";
+
+                requestAnimationFrame(() => {
+
+                    nextSlide.style.transform = "translateX(0)";
+                    title.style.transform = "translateX(0)";
+                    subtitle.style.transform = "translateX(0)";
+                    description.style.transform = "translateX(0)";
+
+                    nextSlide.style.opacity = "1";
+                    title.style.opacity = "1";
+                    subtitle.style.opacity = "1";
+                    description.style.opacity = "1";
+
+                });
+
+                currentIndex = index;
+                /* ----------------------------------
+                   RESET INLINE STYLES
+                ---------------------------------- */
 
                 nextSlide.addEventListener(
                     "transitionend",
@@ -811,27 +384,39 @@ if (firstVideo) {
                             handler
                         );
 
+                        /* Reset Previous Slide */
+
                         currentSlide.style.transform = "";
-
                         currentSlide.style.opacity = "";
-
                         currentSlide.style.transition = "";
 
+                        /* Reset Current Slide */
+
                         nextSlide.style.transform = "";
-
                         nextSlide.style.opacity = "";
-
                         nextSlide.style.transition = "";
+
+                        /* Reset Title */
+
+                        title.style.transform = "";
+                        title.style.opacity = "";
+                        title.style.transition = "";
+
+                        /* Reset Subtitle */
+
+                        subtitle.style.transform = "";
+                        subtitle.style.opacity = "";
+                        subtitle.style.transition = "";
+
+                        /* Reset Description */
+
+                        description.style.transform = "";
+                        description.style.opacity = "";
+                        description.style.transition = "";
 
                     },
                     { once: true }
                 );
-
-                /* ==========================================
-                   UPDATE INDEX
-                ========================================== */
-
-                currentIndex = index;
 
             }, 400);
 
@@ -848,55 +433,84 @@ if (firstVideo) {
 
 
 
-// ********************************************************************************************************************
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// document.addEventListener("DOMContentLoaded", () => {
+// document.addEventListener("DOMContentLoaded", () => 
+// {
 
 //     /* ==========================================
 //        ELEMENTS
 //     ========================================== */
 
-//     const section =
-//     document.querySelector(".asic-section");
+//     const section = document.querySelector(".asic-section");
+
+//     if (!section) return;
 
 //     const wrapper =
-//     document.querySelector(".media-wrapper");
-
-//     const video =
-//     document.querySelector(".asic-video");
-
-//     const image =
-//     document.querySelector(".asic-image");
+//     section.querySelector(".media-wrapper");
 
 //     const content =
-//     document.querySelector(".asic-content");
+//     section.querySelector(".asic-content");
 
 //     const title =
-//     document.querySelector(".asic-title");
+//     section.querySelector(".asic-title");
+
+//     const subtitle =
+//     section.querySelector(".asic-subtitle");
+
+//     const description =
+//     section.querySelector(".asic-desc");
 
 //     const tabs =
-//     document.querySelectorAll(".tab");
+//     section.querySelectorAll(".tab");
+
+//     const slides =
+//     section.querySelectorAll(".asic-slide");
+
+//     let currentIndex = 0;
 
 //     let triggered = false;
 
 //     /* ==========================================
-//        SECTION ENTRY ANIMATION
+//        INITIAL CONTENT
+//     ========================================== */
+
+//     updateContent(slides[0]);
+
+//     /* ==========================================
+//        PLAY FIRST VIDEO
+//     ========================================== */
+
+//     const firstVideo =
+//     slides[0].querySelector("video");
+
+//     if (firstVideo) {
+
+//         firstVideo.play().catch(() => {});
+
+//     }
+
+//     /* ==========================================
+//        UPDATE CONTENT
+//     ========================================== */
+
+//     function updateContent(slide) {
+
+//         const data =
+//         slide.querySelector(".slide-content");
+
+//         if (!data) return;
+
+//         title.innerHTML =
+//         data.querySelector(".slide-title").innerHTML;
+
+//         subtitle.innerHTML =
+//         data.querySelector(".slide-subtitle").innerHTML;
+
+//         description.innerHTML =
+//         data.querySelector(".slide-description").innerHTML;
+
+//     }
+//     /* ==========================================
+//        SECTION ENTRY
 //     ========================================== */
 
 //     function activate() {
@@ -905,23 +519,15 @@ if (firstVideo) {
 
 //         triggered = true;
 
-//         /* Play only if the first tab is video */
+//         const currentSlide = slides[currentIndex];
 
-//         const activeTab =
-//         document.querySelector(".tab.active");
+//         currentSlide.classList.add("active");
 
-//         if (
-//             activeTab &&
-//             activeTab.dataset.type === "video"
-//         ) {
+//         const video = currentSlide.querySelector("video");
 
-//             video.currentTime = 0;
+//         if (video && video.paused) {
 
 //             video.play().catch(() => {});
-
-//             video.style.display = "block";
-
-//             image.style.display = "none";
 
 //         }
 
@@ -938,7 +544,8 @@ if (firstVideo) {
 //         }, 300);
 
 //     }
-//         /* ==========================================
+
+//     /* ==========================================
 //        INTERSECTION OBSERVER
 //     ========================================== */
 
@@ -954,211 +561,250 @@ if (firstVideo) {
 
 //                 triggered = false;
 
-//                 /* Reset Section */
-
 //                 wrapper.classList.remove("shrink");
 
 //                 content.classList.remove("show");
-
-//                 /* Stop Video */
-
-//                 video.pause();
-
-//                 video.currentTime = 0;
-
-//                 /* Reset First Tab */
-
-//                 tabs.forEach((tab, index) => {
-
-//                     tab.classList.remove("active");
-
-//                     if (index === 0) {
-
-//                         tab.classList.add("active");
-
-//                     }
-
-//                 });
-
-//                 /* Reset Title */
-
-//                 if (tabs.length) {
-
-//                     title.textContent =
-//                     tabs[0].dataset.title;
-
-//                 }
-
-//                 /* Reset Media */
-
-//                 if (
-//                     tabs.length &&
-//                     tabs[0].dataset.type === "video"
-//                 ) {
-
-//                     image.style.display = "none";
-
-//                     image.src = "";
-
-//                     video.style.display = "block";
-
-//                     const source =
-//                     video.querySelector("source");
-
-//                     source.src =
-//                     tabs[0].dataset.video;
-
-//                     video.load();
-
-//                 } else if (tabs.length) {
-
-//                     video.pause();
-
-//                     video.style.display = "none";
-
-//                     image.style.display = "block";
-
-//                     image.src =
-//                     tabs[0].dataset.image;
-
-//                 }
-
-//                 /* Reset Animation */
-
-//                 video.style.opacity = "1";
-//                 video.style.transform = "translateX(0)";
-
-//                 image.style.opacity = "1";
-//                 image.style.transform = "translateX(0)";
-
-//                 title.style.opacity = "1";
-//                 title.style.transform = "translateX(0)";
 
 //             }
 
 //         });
 
 //     }, {
+
 //         threshold: 0.6
+
 //     });
 
 //     observer.observe(section);
 
-//         /* ==========================================
+//     /* ==========================================
+//        VIDEO HELPERS
+//     ========================================== */
+
+//     function stopAllVideos() {
+
+//         slides.forEach(slide => {
+
+//             const video = slide.querySelector("video");
+
+//             if (!video) return;
+
+//             video.pause();
+
+//         });
+
+//     }
+
+//     function playVideo(slide) {
+
+//         stopAllVideos();
+
+//         const video = slide.querySelector("video");
+
+//         if (!video) return;
+
+//         video.currentTime = 0;
+
+//         video.play().catch(() => {});
+
+//     }
+
+//     /* ==========================================
+//        SHOW SLIDE
+//     ========================================== */
+
+//     function showSlide(index) {
+
+//         slides.forEach(slide => {
+
+//             slide.classList.remove("active");
+
+//         });
+
+//         slides[index].classList.add("active");
+
+//         playVideo(slides[index]);
+
+//         updateContent(slides[index]);
+
+//         currentIndex = index;
+
+//     }
+//     /* ==========================================
 //        TAB SWITCHER
 //     ========================================== */
 
-//     tabs.forEach(tab => {
+//     tabs.forEach((tab, index) => 
+// {
 
 //         tab.addEventListener("click", () => {
 
-//             if (tab.classList.contains("active")) return;
+//             if (index === currentIndex) return;
 
 //             tabs.forEach(btn => btn.classList.remove("active"));
 //             tab.classList.add("active");
 
-//             const newTitle = tab.dataset.title;
-//             const type = tab.dataset.type;
-//             const newVideo = tab.dataset.video;
-//             const newImage = tab.dataset.image;
+//             const currentSlide = slides[currentIndex];
+//             const nextSlide = slides[index];
 
-//             /* Current visible media */
-
-//             const currentMedia =
-//             video.style.display === "none"
-//                 ? image
-//                 : video;
-
-//             /* Animate current title & media out */
+//             /* ----------------------------------
+//                Animate current content OUT
+//             ---------------------------------- */
 
 //             title.style.transform = "translateX(-300px)";
 //             title.style.opacity = "0";
 
-//             currentMedia.style.transform =
-//                 "translateX(-300px)";
-//             currentMedia.style.opacity = "0";
+//             subtitle.style.transform = "translateX(-300px)";
+//             subtitle.style.opacity = "0";
+
+//             description.style.transform = "translateX(-300px)";
+//             description.style.opacity = "0";
+
+//             currentSlide.style.transform = "translateX(-300px)";
+//             currentSlide.style.opacity = "0";
 
 //             setTimeout(() => {
 
-//                 /* Update title */
+//                 /* ----------------------------------
+//                    Update Content
+//                 ---------------------------------- */
 
-//                 title.textContent = newTitle;
+//                 updateContent(nextSlide);
 
-//                 /* Switch media */
+//                 /* ----------------------------------
+//                    Switch Slides
+//                 ---------------------------------- */
 
-//                 if (type === "video") {
+//                 currentSlide.classList.remove("active");
+//                 nextSlide.classList.add("active");
 
-//                     image.style.display = "none";
+//                 /* ----------------------------------
+//                    Prepare New Slide
+//                 ---------------------------------- */
 
-//                     video.style.display = "block";
-
-//                     const source =
-//                     video.querySelector("source");
-
-//                     source.src = newVideo;
-
-//                     video.load();
-
-//                     video.play().catch(() => {});
-
-//                 } else {
-
-//                     video.pause();
-
-//                     video.style.display = "none";
-
-//                     image.style.display = "block";
-
-//                     image.src = newImage;
-
-//                 }
-
-//                 const nextMedia =
-//                 type === "video"
-//                     ? video
-//                     : image;
-
-//                 /* Start from right */
+//                 nextSlide.style.transition = "none";
+//                 nextSlide.style.transform = "translateX(300px)";
+//                 nextSlide.style.opacity = "0";
 
 //                 title.style.transition = "none";
-//                 nextMedia.style.transition = "none";
+//                 subtitle.style.transition = "none";
+//                 description.style.transition = "none";
 
-//                 title.style.transform =
-//                     "translateX(300px)";
+//                 title.style.transform = "translateX(300px)";
+//                 subtitle.style.transform = "translateX(300px)";
+//                 description.style.transform = "translateX(300px)";
+
 //                 title.style.opacity = "0";
+//                 subtitle.style.opacity = "0";
+//                 description.style.opacity = "0";
 
-//                 nextMedia.style.transform =
-//                     "translateX(300px)";
-//                 nextMedia.style.opacity = "0";
+//                 /* Force Repaint */
 
-//                 /* Force repaint */
+//                 void nextSlide.offsetWidth;
 
-//                 void title.offsetWidth;
+//                 /* ----------------------------------
+//                    Restore Transition
+//                 ---------------------------------- */
 
-//                 /* Restore transition */
+//                 nextSlide.style.transition =
+//                     "transform .8s cubic-bezier(.22,.61,.36,1), opacity .8s ease";
 
 //                 title.style.transition =
 //                     "transform .8s cubic-bezier(.22,.61,.36,1), opacity .8s ease";
 
-//                 nextMedia.style.transition =
+//                 subtitle.style.transition =
 //                     "transform .8s cubic-bezier(.22,.61,.36,1), opacity .8s ease";
+
+//                 description.style.transition =
+//                     "transform .8s cubic-bezier(.22,.61,.36,1), opacity .8s ease";
+
+//                 /* ----------------------------------
+//                    Animate Everything In
+//                 ---------------------------------- */
 
 //                 requestAnimationFrame(() => {
 
-//                     title.style.transform =
-//                         "translateX(0)";
-//                     title.style.opacity = "1";
+//                     title.style.transform = "translateX(0)";
+//                     subtitle.style.transform = "translateX(0)";
+//                     description.style.transform = "translateX(0)";
 
-//                     nextMedia.style.transform =
-//                         "translateX(0)";
-//                     nextMedia.style.opacity = "1";
+//                     title.style.opacity = "1";
+//                     subtitle.style.opacity = "1";
+//                     description.style.opacity = "1";
+
+//                     nextSlide.style.transform = "translateX(0)";
+//                     nextSlide.style.opacity = "1";
 
 //                 });
+
+//                 /* ----------------------------------
+//                    Play Video (if any)
+//                 ---------------------------------- */
+
+//                 playVideo(nextSlide);
+
+//                 currentIndex = index;
 
 //             }, 400);
 
 //         });
 
-//     });
-
 // });
+
+//                 /* ----------------------------------
+//                    RESET INLINE STYLES
+//                 ---------------------------------- */
+
+//                 nextSlide.addEventListener(
+//                     "transitionend",
+//                     function handler(e) {
+
+//                         if (e.propertyName !== "transform") return;
+
+//                         nextSlide.removeEventListener(
+//                             "transitionend",
+//                             handler
+//                         );
+
+//                         /* Reset Previous Slide */
+
+//                         currentSlide.style.transform = "";
+//                         currentSlide.style.opacity = "";
+//                         currentSlide.style.transition = "";
+
+//                         /* Reset Current Slide */
+
+//                         nextSlide.style.transform = "";
+//                         nextSlide.style.opacity = "";
+//                         nextSlide.style.transition = "";
+
+//                         /* Reset Title */
+
+//                         title.style.transform = "";
+//                         title.style.opacity = "";
+//                         title.style.transition = "";
+
+//                         /* Reset Subtitle */
+
+//                         subtitle.style.transform = "";
+//                         subtitle.style.opacity = "";
+//                         subtitle.style.transition = "";
+
+//                         /* Reset Description */
+
+//                         description.style.transform = "";
+//                         description.style.opacity = "";
+//                         description.style.transition = "";
+
+//                     },
+//                     { once: true }
+//                 );
+
+//                 /* ----------------------------------
+//                    UPDATE INDEX
+//                 ---------------------------------- */
+
+//                 currentIndex = index;
+
+//             }, 400);
+// // ********************************************************************************************************************
