@@ -1849,7 +1849,7 @@ gap:50px 30px;
 
 .xpu-blocks__media{
 
-    width:min(90vw,1400px);
+    width:100%;
 
     aspect-ratio:16/9;
 
