@@ -1073,6 +1073,14 @@ font-family: 'Riona Sans Light';
 /*     opacity:0; */
 } 
 
+.card-item.hide{
+    opacity:0;
+    visibility:hidden;
+    pointer-events:none;
+    transition:opacity .35s ease;
+
+}
+
 .packaging-section .packaging-hero-title{
 
     margin:0;
@@ -1779,6 +1787,89 @@ gap:50px 30px;
 }
 
 
+/* xpu section css start from hre */
+
+
+.xpu-blocks__intro {
+    position: absolute;
+    inset: 0;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    width: min(900px, 90vw);
+    margin: auto;
+    text-align: center;
+
+    z-index: 5;
+}
+
+.xpu-blocks__title {
+    font-size: clamp(36px, 6vw, 90px);
+    line-height: 1.1;
+    color: white;
+}
+
+.xpu-blocks__description {
+    width: min(700px, 90%);
+    margin-top: 24px;
+    color: white;
+    font-size: clamp(18px, 2vw, 26px);
+    line-height: 1.6;
+}
+
+
+
+
+
+.xpu-blocks{
+
+    position:relative;
+
+    height:700vh;
+
+}
+
+.xpu-blocks__sticky{
+
+    position:sticky;
+    top:0;
+
+    height:100vh;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    overflow:hidden;
+
+}
+
+.xpu-blocks__media{
+
+    width:min(90vw,1400px);
+
+    aspect-ratio:16/9;
+
+    border-radius:30px;
+
+    overflow:hidden;
+
+}
+
+.xpu-blocks__canvas{
+
+    width:100%;
+    height:100%;
+
+    display:block;
+
+}
+
+/* end here */
+
 /* ================= RESPONSIVE ================= */
 
 /* Responsive */
@@ -1817,6 +1908,50 @@ gap:50px 30px;
 {
 
 
+/* packaging section css start from here */
+section.packaging-section{
+    padding: clamp(60px, 8vw, 120px) clamp(20px, 6vw, 120px);
+}
+
+.partner-wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+}
+
+/* section.packaging-section .packaging-content-wrapper .packaging-content {
+    position: unset;
+    transform: none !important;
+} */
+
+.packaging-section .packaging-tabs {
+    align-items: center;
+    justify-content: flex-end;
+    position: unset;
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+}
+
+.packaging-section .packaging-video-area {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: column;
+}
+
+
+/* .packaging-section .packaging-video-wrapper {
+    position: unset;
+    transform: translate(0);
+    overflow: hidden;
+    transition:none; 
+    width: 100%;
+    height: 100%;
+} */
+/* end here */
+
 /* new static css for mobile */
 
     .asic-section {
@@ -1832,7 +1967,7 @@ gap:50px 30px;
 
     .asic-section .asic-content {
         position: unset;
-        transform: translate(0);
+        transform: translate(0) !important;
         width: 100%;
        
     }

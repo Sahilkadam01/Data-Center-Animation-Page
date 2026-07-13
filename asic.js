@@ -1,14 +1,3 @@
-
-
-
-
-
-
-
-
-
-
-
 document.addEventListener("DOMContentLoaded", () => 
 {
 
@@ -500,71 +489,90 @@ setTimeout(() => {
 
 
 
-
-
-
-
-
-
 // crad expand js start form here
 const cardContainer = document.querySelector(".asic-card");
 
 if (cardContainer) {
 
-const cards = cardContainer.querySelectorAll(".card-item");
+    const cards = cardContainer.querySelectorAll(".card-item");
 
-cards.forEach(card => {
+    // ==========================================
+    // RESET CARD
+    // ==========================================
 
-card.addEventListener("click", () => {
+    function resetCard(card) {
 
-// ==========================
-// COLLAPSE
-// ==========================
-if (card.classList.contains("active")) {
-
-    card.classList.add("collapse");
-
-    // Show other cards slightly before collapse ends
-    const revealTimer = setTimeout(() => {
-        cardContainer.classList.remove("has-active");
-    }, 400); // for a 900ms animation
-
-    const onAnimationEnd = (e) => {
-
-        if (e.animationName !== "collapseCard") return;
-
-        clearTimeout(revealTimer);
-
-        card.classList.remove("collapse");
         card.classList.remove("active");
+        card.classList.remove("collapse");
 
-        card.removeEventListener("animationend", onAnimationEnd);
+        // Clear any inline styles if added
+        card.removeAttribute("style");
 
-    };
+        const img = card.querySelector(".card-img");
+        const cont = card.querySelector(".cont-wrap");
 
-    card.addEventListener("animationend", onAnimationEnd);
+        if (img) img.removeAttribute("style");
+        if (cont) cont.removeAttribute("style");
 
-    return;
-}
+    }
 
-// ==========================
-// EXPAND
-// ==========================
+    cards.forEach(card => {
 
-cards.forEach(c => {
-    c.classList.remove("active");
-    c.classList.remove("collapse");
-});
+        card.addEventListener("click", () => {
 
-cardContainer.classList.add("has-active");
+            // ==========================================
+            // COLLAPSE
+            // ==========================================
 
-requestAnimationFrame(() => {
-    card.classList.add("active");
-});
+            if (card.classList.contains("active")) {
 
-});
+                card.classList.add("collapse");
 
-});
+                // Show other cards before collapse finishes
+                setTimeout(() => {
+
+                    cardContainer.classList.remove("has-active");
+
+                }, 400);
+
+                // Reset after animation finishes
+                setTimeout(() => {
+
+                    resetCard(card);
+
+                    cards.forEach(other => {
+
+                        resetCard(other);
+
+                    });
+
+                }, 500); // Match your collapse animation duration
+
+                return;
+
+            }
+
+            // ==========================================
+            // EXPAND
+            // ==========================================
+
+            cards.forEach(other => {
+
+                resetCard(other);
+
+            });
+
+            cardContainer.classList.add("has-active");
+
+            requestAnimationFrame(() => {
+
+                card.classList.add("active");
+
+            });
+
+        });
+
+    });
 
 }
 

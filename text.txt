@@ -1,3 +1,1280 @@
+vidoe full play on scroll and then shrink full css here 
+/////------------------------------------------------------
+
+
+/* ================= VIDEO SECTION ================= */
+
+.asic-section .asic-card.has-active .card-item.active .card_cont {
+    width: 45%;
+}
+
+
+.asic-section .media-wrapper:has(.asic-slide:nth-child(3).active) {
+   border-radius: 24px;
+    height: min(60vh, 600px);
+    top: 65%;
+       width: min(90vw, 100vw);
+    transition: width .6s ease, height .6s ease;
+}
+
+
+.asic-section .media-wrapper.shrink:has(.asic-slide:nth-child(3).active) {
+   border-radius: 24px;
+    height: min(60vh, 600px);
+    top: 65%;
+    width: min(90vw, 100vw);
+    transition: width .6s ease, height .6s ease;
+}
+
+.asic-section .asic-card{
+
+    overflow:hidden;
+
+}
+
+.asic-section .card-item{
+
+    transition:
+        flex .55s cubic-bezier(.25,.8,.25,1),
+        opacity .25s ease,
+        transform .35s ease;
+
+}
+.asic-section .card-item{
+
+align-items: center;
+    justify-content: space-between;
+    height: 100%;
+    flex:1;
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:24px;
+
+        padding: clamp(15px, 2vw, 32px);
+
+    border: 1px solid #b77a20;
+   background: #080808;
+background: linear-gradient(
+    180deg,
+    #050505 0%,
+    #1A0F05 25%,
+    #2C1806 55%,
+    #804F18 82%,
+    #F2A234 100%
+);
+
+    border-radius:24px;
+
+    cursor:pointer;
+
+    overflow:hidden;
+
+    position:relative;
+
+    will-change:transform;
+
+    transition:
+        box-shadow .35s ease,
+        background .35s ease;
+
+}
+
+.asic-section .asic-card.has-active .card-img{
+
+width: clamp(30%, 34vw, 50%);
+    height: clamp(40%, 25vw, 95%);
+
+}
+
+.asic-section .asic-card .card-img{
+
+    height: clamp(200px, 17vw, 280px);
+    flex-shrink:0;
+
+}
+
+.asic-section .card-img img{
+    object-fit: cover;
+    width:100%;
+    height:100%;
+    display:block;
+
+}
+
+.asic-section .cont-wrap{
+
+    flex:1;
+
+}
+
+.asic-section .asic-card.has-active .card-item:not(.active):not(.collapse){
+    opacity:0;
+    flex:0;
+    transform:scale(.98);
+}
+
+.asic-section .asic-card.has-active .card-item.active {
+    opacity: 1;
+    flex: 0 0 45%;
+    transform: scale(1);
+    position: absolute;
+    inset: 0;
+    flex-direction: row-reverse;
+    z-index: 1;
+}
+
+.asic-section .asic-card.has-active .card-item.active{
+    animation:expandCard .9s cubic-bezier(.22,1,.36,1) forwards;
+}
+
+.asic-section .asic-card.has-active .card-item.collapse{
+    animation:collapseCard .9s cubic-bezier(.22,1,.36,1) forwards;
+}
+
+.asic-card.has-active .card-item.active .cont-wrap{
+animation: expandCard 0.6s ease-in-out forwards;
+}
+
+
+/* Expanded layout */
+
+
+.asic-section .card-item.active h3{
+    margin-bottom:16px;
+    font-size:clamp(22px,3vw,40px);
+
+
+
+}
+
+.asic-section .card-item.active{
+
+  
+    opacity:1;
+
+    flex:1;
+
+    transform:scale(1);
+
+}
+
+/* Prevent overflow while animating */
+
+.asic-section .asic-card.animating{
+
+    pointer-events:none;
+
+}
+
+
+
+
+.asic-section .asic-slide{
+
+    position:absolute;
+    inset:0;
+
+    opacity:0;
+    visibility:hidden;
+
+    pointer-events:none;
+
+    transition:
+        opacity .8s ease,
+        transform .8s ease;
+
+}
+
+.asic-section .asic-slide.active{
+
+    opacity:1;
+    visibility:visible;
+
+    pointer-events:auto;
+
+}
+
+
+
+
+.asic-section .media-wrapper .asic-card{
+
+    width:100%;
+    height:100%;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    gap:24px;
+    box-sizing:border-box;
+    background:#000;
+padding: clamp(15px, 2vw, 60px);
+
+}
+
+
+.asic-section .card-item p{
+
+    color:#fff;
+
+    line-height:1.3;
+
+    font-size:16px;
+
+}
+
+.asic-section .card-item h3{
+
+    color:#fff;
+font-family: 'Riona Sans Light';
+    margin-bottom:16px;
+
+    font-size:clamp(16px,1.2vw,20px);
+
+    font-weight:400;
+
+}
+
+
+.asic-section .asic-image{
+
+    width:100%;
+
+    height:100%;
+
+    object-fit:cover;
+
+    display:block;
+
+}
+
+.asic-section .media-wrapper.shrink .asic-video{
+    object-fit:contain;
+
+}
+
+
+
+.asic-section .asic-video,
+.asic-section .asic-image{
+
+    position:absolute;
+    inset:0;
+
+    width:100%;
+    height:100%;
+
+    object-fit:cover;
+
+    transition:
+        transform .8s cubic-bezier(.22,.61,.36,1),
+        opacity .8s ease;
+
+}
+
+.asic-section .asic-image{
+
+    display:none;
+
+}
+
+
+
+
+.asic-section {
+    position: relative;
+    height: 100vh;
+    overflow: hidden;
+    background: #000;
+}
+
+/* WRAPPER (center + resize only) */
+.asic-section .media-wrapper {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+
+    width: 100vw;
+    height: 100vh;
+
+    transform: translate(-50%, -50%);
+
+    overflow: hidden;
+
+    will-change: width, height, border-radius;
+
+    transition:
+        width 0.9s cubic-bezier(0.87, 0, 0.13, 1),
+        height 0.9s cubic-bezier(0.87, 0, 0.13, 1),
+        border-radius 0.9s cubic-bezier(0.87, 0, 0.13, 1);
+}
+
+/* FINAL RESIZE STATE */
+.asic-section .media-wrapper.shrink {
+
+    width:min(90vw,1000px);
+    height:min(60vh,500px);
+    top:60%;
+    border-radius:24px;
+}
+
+
+/* ================= CONTENT ================= */
+
+.asic-section .asic-content{
+
+    position:absolute;
+
+    top:40px;
+
+    left:50%;
+
+    transform:translate(-50%,40px);
+
+    width:min(1100px,90%);
+
+    text-align:center;
+
+    opacity:0;
+
+    z-index:0;
+
+    transition:
+        opacity .4s ease,
+        transform .4s ease;
+
+}
+
+.asic-section .asic-content.show {
+    opacity: 1;
+    transform: translate(-50%, 0);
+}
+
+.asic-section .asic-title{
+    line-height: 1.1;
+    color: #ffffff;
+    font-size: clamp(20px, 2.7vw, 44px);
+    margin: 0;
+    font-family: 'Riona Sans Light';
+    transition:
+        transform .8s cubic-bezier(.22,.61,.36,1),
+        opacity .8s ease;
+
+}
+
+/* ==========================================
+   DESCRIPTION WRAPPER
+========================================== */
+
+.asic-section .asic-description{
+
+    max-width:800px;
+
+    margin:0 auto;
+
+}
+
+/* ==========================================
+   SUB TITLE
+========================================== */
+
+.asic-section .asic-subtitle{
+    line-height: 1.1;
+    color: #ff9800;
+    font-size: clamp(20px, 2vw, 30px);
+    font-family: 'Riona Sans Light';
+    margin:0 0 14px;
+    transition:
+        transform .8s cubic-bezier(.22,.61,.36,1),
+        opacity .8s ease;
+}
+
+/* ==========================================
+   DESCRIPTION
+========================================== */
+
+.asic-section .asic-desc{
+line-height: 1.5;
+    color: white;
+    margin: 0;
+    transition:
+        transform .8s cubic-bezier(.22,.61,.36,1),
+        opacity .8s ease;
+
+}
+
+
+.asic-section .tab-title{
+
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:center;
+
+    justify-content:center;
+
+    gap:20px;
+
+}
+
+.asic-section .slide-content{
+
+    display:none;
+
+}
+
+/* ================= TABS ================= */
+
+.asic-section .asic-tabs {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin: 10px 0;
+}
+
+.asic-section .tab {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background:#fff;
+    cursor: pointer;
+    font-size: 0;
+    padding:0;
+    border:none;
+}
+
+.asic-section .tab.active {
+    background: #ff9800;
+}
+
+/* tabber css start from here  */
+.asic-section .asic-title,
+.asic-section .asic-video,
+.asic-section .asic-image{
+
+    transition:
+        transform .8s cubic-bezier(.22,.61,.36,1),
+        opacity .8s ease;
+
+}
+
+/* end here */
+
+
+/* query start from here */
+@media (width<=1024px)
+{
+
+    /* custom asic section css  */
+
+
+  .asic-section {
+        padding: clamp(60px, 8vw, 120px) clamp(20px, 6vw, 120px);
+        position:unset;
+        height: 100%;
+        overflow: hidden;
+        background: #000;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+
+    section.asic-section .asic-content {
+        position: unset;
+        transform: translate(0) !important;
+        width: 100%;
+       
+    }
+
+    .asic-section .media-wrapper {
+        position: unset;
+        width: 100%;
+        height: 100%;
+        transform: translate(0);
+        overflow: hidden;
+        transition: none;
+    }
+    .asic-section .media-wrapper,
+    .asic-section .media-wrapper.shrink {
+        width: min(90vw, 1000px);
+        height: min(60vh, 500px);
+        top: 60%;
+        border-radius: 24px;
+    }
+    
+    .asic-section .asic-content {
+        opacity: 1;
+       
+    }
+/* end here */
+}
+
+
+@media (width<=425px)
+{
+.asic-section .tab-title {
+  
+    width: clamp(100%, 70vw, 95%);
+}
+}
+
+
+@media (max-height:900px) and (1024px<= width <=1680px)
+{
+  .asic-section .media-wrapper.shrink {
+   
+    height: min(45vh, 500px);
+    top: 65%;
+    width: min(90vw, 1000px);
+}
+
+.asic-section .media-wrapper.shrink:has(.asic-slide:nth-child(3).active) {
+    border-radius: 24px;
+    height: min(60vh, 600px);
+    top: 70%;
+    transition: width .6s ease, height .6s ease;
+    width: min(90vw, 100vw);
+} 
+ 
+}
+
+@media (max-height: 767px) {
+
+    .asic-section .asic-title {
+        font-size:clamp(20px, 4vh, 50px);
+    }
+ 
+}
+
+/* end here */
+
+/* @keyframes start from here  */
+
+@keyframes expandCard {
+    0% {
+        width: 0%;
+        opacity: 0.4;
+        transform: scaleX(0.96);
+        transform-origin: center;
+    }
+
+    30% {
+        opacity: 0.6;
+    }
+
+    70% {
+        opacity: 0.85;
+        transform: scaleX(0.99);
+    }
+
+    100% {
+        width: 100%;
+        opacity: 1;
+        transform: scaleX(1);
+        transform-origin:center;
+    }
+}
+
+@keyframes collapseCard{
+
+    from{
+        width:100%;
+        opacity:1;
+        transform:scaleX(1);
+    }
+
+    to{
+        width:0%;
+        opacity:0;
+        transform:scaleX(.96);
+    }
+
+}
+
+
+
+
+
+
+// end hre ///
+
+// and this is  the js for that aobve full vidoe and then shrink section //////
+
+// document.addEventListener("DOMContentLoaded", () => {
+
+//     /* ==========================================================
+//        ELEMENTS
+//     ========================================================== */
+
+//     const section = document.querySelector(".asic-section");
+// console.log("Section:", section);
+
+// if (section) {
+//     console.log("Slides:", section.querySelectorAll(".asic-slide"));
+//     console.log("Slides length:", section.querySelectorAll(".asic-slide").length);
+// }
+
+//     if (!section) return;
+
+//     const wrapper = section.querySelector(".media-wrapper");
+
+//     const content = section.querySelector(".asic-content");
+
+//     const title = section.querySelector(".asic-title");
+
+//     const subtitle = section.querySelector(".asic-subtitle");
+
+//     const description = section.querySelector(".asic-desc");
+
+//     const tabs = section.querySelectorAll(".tab");
+
+//     const slides = section.querySelectorAll(".asic-slide");
+// console.log("Slides:", slides);
+// console.log("Slides length:", slides.length);
+// console.log("First slide:", slides[0]);
+
+//     let currentIndex = 0;
+
+//     let triggered = false;
+
+
+
+//     /* ==========================================================
+//        INITIAL STATE
+//     ========================================================== */
+
+//     slides.forEach((slide, index) => {
+
+//         slide.classList.remove("active");
+
+//         if (index === 0) {
+
+//             slide.classList.add("active");
+
+//         }
+
+//     });
+
+//     tabs.forEach((tab, index) => {
+
+//         tab.classList.remove("active");
+
+//         if (index === 0) {
+
+//             tab.classList.add("active");
+
+//         }
+
+//     });
+
+
+
+//     /* ==========================================================
+//        COPY CONTENT FROM FIRST SLIDE
+//     ========================================================== */
+
+//     updateContent(slides[0]);
+
+
+
+//     /* ==========================================================
+//        AUTOPLAY FIRST VIDEO
+//     ========================================================== */
+
+//     const firstVideo = slides[0].querySelector("video");
+
+//     if (firstVideo) {
+
+//         firstVideo.muted = true;
+
+//         firstVideo.play().catch(() => {});
+
+//     }
+
+
+
+//     /* ==========================================================
+//        UPDATE TITLE / SUBTITLE / DESCRIPTION
+//     ========================================================== */
+
+//     function updateContent(slide) {
+
+//         const data = slide.querySelector(".slide-content");
+
+//         if (!data) return;
+
+//         const slideTitle =
+//             data.querySelector(".slide-title");
+
+//         const slideSubtitle =
+//             data.querySelector(".slide-subtitle");
+
+//         const slideDesc =
+//             data.querySelector(".slide-description");
+
+//         if (slideTitle) {
+
+//             title.innerHTML = slideTitle.innerHTML;
+
+//         }
+
+//         if (slideSubtitle) {
+
+//             subtitle.innerHTML = slideSubtitle.innerHTML;
+
+//         }
+
+//         if (slideDesc) {
+
+//             description.innerHTML = slideDesc.innerHTML;
+
+//         }
+
+//     }
+
+
+
+//     /* ==========================================================
+//        STOP ALL VIDEOS
+//     ========================================================== */
+
+//     function stopAllVideos() {
+
+//         slides.forEach(slide => {
+
+//             const video = slide.querySelector("video");
+
+//             if (!video) return;
+
+//             video.pause();
+
+//             video.currentTime = 0;
+
+//         });
+
+//     }
+
+
+
+//     /* ==========================================================
+//        PLAY VIDEO OF ACTIVE SLIDE
+//     ========================================================== */
+
+//     function playVideo(slide) {
+
+//         stopAllVideos();
+
+//         const video = slide.querySelector("video");
+
+//         if (!video) return;
+
+//         video.currentTime = 0;
+
+//         video.play().catch(() => {});
+
+//     }
+//     /* ==========================================================
+//        ACTIVATE SECTION
+//     ========================================================== */
+
+//     function activate() {
+
+//         if (triggered) return;
+
+//         triggered = true;
+
+//         const currentSlide = slides[currentIndex];
+
+//         currentSlide.classList.add("active");
+
+//         updateContent(currentSlide);
+
+//         const video = currentSlide.querySelector("video");
+
+//         if (video && video.paused) {
+
+//             video.play().catch(() => {});
+
+//         }
+
+//         setTimeout(() => {
+
+//             wrapper.classList.add("shrink");
+
+//             setTimeout(() => {
+
+//                 content.classList.add("show");
+
+//             }, 500);
+
+//         }, 300);
+
+//     }
+
+
+
+//     /* ==========================================================
+//        RESET SECTION
+//     ========================================================== */
+
+//     /* ==========================================================
+//    RESET SECTION
+// ========================================================== */
+
+// function resetSection() {
+
+//     triggered = false;
+
+//     wrapper.classList.remove("shrink");
+
+//     content.classList.remove("show");
+
+//     /* ----------------------------------
+//        Reset Active Tab
+//     ---------------------------------- */
+
+//     tabs.forEach(tab => tab.classList.remove("active"));
+
+//     tabs[0].classList.add("active");
+
+//     /* ----------------------------------
+//        Reset Active Slide
+//     ---------------------------------- */
+
+//     slides.forEach(slide => {
+
+//         slide.classList.remove("active");
+
+//         slide.style.transform = "";
+//         slide.style.opacity = "";
+//         slide.style.transition = "";
+
+//     });
+
+//     slides[0].classList.add("active");
+
+//     /* ----------------------------------
+//        Reset Content
+//     ---------------------------------- */
+
+//     updateContent(slides[0]);
+
+//     /* ----------------------------------
+//        Reset Videos
+//     ---------------------------------- */
+
+//     stopAllVideos();
+
+//     const firstVideo = slides[0].querySelector("video");
+
+//     if (firstVideo) {
+
+//         firstVideo.currentTime = 0;
+
+//         firstVideo.play().catch(() => {});
+
+//     }
+
+//     /* ----------------------------------
+//        Reset Index
+//     ---------------------------------- */
+
+//     currentIndex = 0;
+
+// }
+
+
+
+//     /* ==========================================================
+//        INTERSECTION OBSERVER
+//     ========================================================== */
+//  if(window.innerWidth>=1024)
+// {
+
+//     const observer = new IntersectionObserver((entries) => {
+
+//         entries.forEach(entry => {
+
+//             if (entry.isIntersecting) {
+
+//                 activate();
+
+//             } else {
+
+//                 resetSection();
+
+//             }
+
+//         });
+
+//     }, {
+
+//         threshold: 0.6
+
+//     });
+
+//     observer.observe(section);
+
+//     }
+
+//     /* ==========================================================
+//        SHOW SLIDE
+//     ========================================================== */
+
+//     function showSlide(index) {
+
+//         slides.forEach(slide => {
+
+//             slide.classList.remove("active");
+
+//         });
+
+//         slides[index].classList.add("active");
+
+//         updateContent(slides[index]);
+
+//         playVideo(slides[index]);
+
+//         currentIndex = index;
+
+//     }
+//     /* ==========================================================
+//        TAB SWITCHER
+//     ========================================================== */
+
+//     tabs.forEach((tab, index) => {
+
+//         tab.addEventListener("click", () => {
+
+//             if (index === currentIndex) return;
+
+//             tabs.forEach(btn => btn.classList.remove("active"));
+//             tab.classList.add("active");
+
+//             const currentSlide = slides[currentIndex];
+//             const nextSlide = slides[index];
+
+//             /* ----------------------------------
+//                Animate OUT
+//             ---------------------------------- */
+
+//             title.style.transform = "translateX(-300px)";
+//             subtitle.style.transform = "translateX(-300px)";
+//             description.style.transform = "translateX(-300px)";
+//             currentSlide.style.transform = "translateX(-300px)";
+
+//             title.style.opacity = "0";
+//             subtitle.style.opacity = "0";
+//             description.style.opacity = "0";
+//             currentSlide.style.opacity = "0";
+
+//             setTimeout(() => {
+
+//                 /* ----------------------------------
+//                    Hide Current Slide
+//                 ---------------------------------- */
+
+//                 currentSlide.classList.remove("active");
+
+//                 /* ----------------------------------
+//                    Show Next Slide
+//                 ---------------------------------- */
+
+//                 nextSlide.classList.add("active");
+
+//                 updateContent(nextSlide);
+
+//                 playVideo(nextSlide);
+
+//                 /* ----------------------------------
+//                    Prepare Animation
+//                 ---------------------------------- */
+
+//                 nextSlide.style.transition = "none";
+//                 title.style.transition = "none";
+//                 subtitle.style.transition = "none";
+//                 description.style.transition = "none";
+
+//                 nextSlide.style.transform = "translateX(300px)";
+//                 title.style.transform = "translateX(300px)";
+//                 subtitle.style.transform = "translateX(300px)";
+//                 description.style.transform = "translateX(300px)";
+
+//                 nextSlide.style.opacity = "0";
+//                 title.style.opacity = "0";
+//                 subtitle.style.opacity = "0";
+//                 description.style.opacity = "0";
+
+//                 void nextSlide.offsetWidth;
+
+//                 /* ----------------------------------
+//                    Restore Transition
+//                 ---------------------------------- */
+
+//                 nextSlide.style.transition =
+//                     "transform .8s cubic-bezier(.22,.61,.36,1), opacity .8s ease";
+
+//                 title.style.transition =
+//                     "transform .8s cubic-bezier(.22,.61,.36,1), opacity .8s ease";
+
+//                 subtitle.style.transition =
+//                     "transform .8s cubic-bezier(.22,.61,.36,1), opacity .8s ease";
+
+//                 description.style.transition =
+//                     "transform .8s cubic-bezier(.22,.61,.36,1), opacity .8s ease";
+
+//                 requestAnimationFrame(() => {
+
+//                     nextSlide.style.transform = "translateX(0)";
+//                     title.style.transform = "translateX(0)";
+//                     subtitle.style.transform = "translateX(0)";
+//                     description.style.transform = "translateX(0)";
+
+//                     nextSlide.style.opacity = "1";
+//                     title.style.opacity = "1";
+//                     subtitle.style.opacity = "1";
+//                     description.style.opacity = "1";
+
+//                 });
+
+//                 currentIndex = index;
+//                 /* ----------------------------------
+//                    RESET INLINE STYLES
+//                 ---------------------------------- */
+
+//                 nextSlide.addEventListener(
+//                     "transitionend",
+//                     function handler(e) {
+
+//                         if (e.propertyName !== "transform") return;
+
+//                         nextSlide.removeEventListener(
+//                             "transitionend",
+//                             handler
+//                         );
+
+//                         /* Reset Previous Slide */
+
+//                         currentSlide.style.transform = "";
+//                         currentSlide.style.opacity = "";
+//                         currentSlide.style.transition = "";
+
+//                         /* Reset Current Slide */
+
+//                         nextSlide.style.transform = "";
+//                         nextSlide.style.opacity = "";
+//                         nextSlide.style.transition = "";
+
+//                         /* Reset Title */
+
+//                         title.style.transform = "";
+//                         title.style.opacity = "";
+//                         title.style.transition = "";
+
+//                         /* Reset Subtitle */
+
+//                         subtitle.style.transform = "";
+//                         subtitle.style.opacity = "";
+//                         subtitle.style.transition = "";
+
+//                         /* Reset Description */
+
+//                         description.style.transform = "";
+//                         description.style.opacity = "";
+//                         description.style.transition = "";
+
+//                     },
+//                     { once: true }
+//                 );
+
+//             }, 400);
+
+//         });
+
+//     });
+
+// });
+
+
+// // // crad expand js start form here
+// // const cardContainer = document.querySelector(".asic-card");
+
+// // if (cardContainer) {
+
+// //     const cards = cardContainer.querySelectorAll(".card-item");
+
+// //     cards.forEach(card => {
+
+// //         card.addEventListener("click", () => {
+
+// //             // ==========================
+// //             // COLLAPSE
+// //             // ==========================
+// //             if (card.classList.contains("active")) {
+
+// //                 card.classList.add("collapse");
+
+// //                 // Show other cards slightly before collapse ends
+// //                 const revealTimer = setTimeout(() => {
+// //                     cardContainer.classList.remove("has-active");
+// //                 }, 400); // for a 900ms animation
+
+// //                 const onAnimationEnd = (e) => {
+
+// //                     if (e.animationName !== "collapseCard") return;
+
+// //                     clearTimeout(revealTimer);
+
+// //                     card.classList.remove("collapse");
+// //                     card.classList.remove("active");
+
+// //                     card.removeEventListener("animationend", onAnimationEnd);
+
+// //                 };
+
+// //                 card.addEventListener("animationend", onAnimationEnd);
+
+// //                 return;
+// //             }
+
+// //             // ==========================
+// //             // EXPAND
+// //             // ==========================
+
+// //             cards.forEach(c => {
+// //                 c.classList.remove("active");
+// //                 c.classList.remove("collapse");
+// //             });
+
+// //             cardContainer.classList.add("has-active");
+
+// //             requestAnimationFrame(() => {
+// //                 card.classList.add("active");
+// //             });
+
+// //         });
+
+// //     });
+
+// // }
+
+// // crad expand js start form here
+// const cardContainer = document.querySelector(".asic-card");
+
+// if (cardContainer) {
+
+//     const cards = cardContainer.querySelectorAll(".card-item");
+
+//     // ==========================================
+//     // RESET CARD
+//     // ==========================================
+
+//     function resetCard(card) {
+
+//         card.classList.remove("active");
+//         card.classList.remove("collapse");
+
+//         // Clear any inline styles if added
+//         card.removeAttribute("style");
+
+//         const img = card.querySelector(".card-img");
+//         const cont = card.querySelector(".cont-wrap");
+
+//         if (img) img.removeAttribute("style");
+//         if (cont) cont.removeAttribute("style");
+
+//     }
+
+//     cards.forEach(card => {
+
+//         card.addEventListener("click", () => {
+
+//             // ==========================================
+//             // COLLAPSE
+//             // ==========================================
+
+//             if (card.classList.contains("active")) {
+
+//                 card.classList.add("collapse");
+
+//                 // Show other cards before collapse finishes
+//                 setTimeout(() => {
+
+//                     cardContainer.classList.remove("has-active");
+
+//                 }, 400);
+
+//                 // Reset after animation finishes
+//                 setTimeout(() => {
+
+//                     resetCard(card);
+
+//                     cards.forEach(other => {
+
+//                         resetCard(other);
+
+//                     });
+
+//                 }, 500); // Match your collapse animation duration
+
+//                 return;
+
+//             }
+
+//             // ==========================================
+//             // EXPAND
+//             // ==========================================
+
+//             cards.forEach(other => {
+
+//                 resetCard(other);
+
+//             });
+
+//             cardContainer.classList.add("has-active");
+
+//             requestAnimationFrame(() => {
+
+//                 card.classList.add("active");
+
+//             });
+
+//         });
+
+//     });
+
+// }
+
+
+//------ end here ---------------//
+
+
+
+The most impactful way to deliver compute efficiency is running chips at lower voltage. Since power scales cubically with voltage, operating lower has an outsized effect - and with today's fixed power budgets in data centers, this is critical. The real challenge isn't simply running at lower voltage; it's moving the knee of the curve so that performance doesn't drop nonlinearly when you do. This requires deep co-optimization across design, process technology, and circuit architecture. MediaTek's extensive mobile experience - where low-voltage operation is foundational - gives us a significant head start in applying these learnings to data center chips.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 document.addEventListener("DOMContentLoaded", () => {
 
 // last section tabbers cards js start from hre
@@ -983,3 +2260,74 @@ packTabs.forEach((tab, index) => {
 
 
 
+/* ==========================================
+   ASIC CARD
+========================================== */
+
+const cardContainer = document.querySelector(".asic-card");
+
+if (cardContainer) {
+
+    const cards = cardContainer.querySelectorAll(".card-item");
+
+    cards.forEach(card => {
+
+        card.addEventListener("click", () => {
+
+            // -----------------------------
+            // Collapse active card
+            // -----------------------------
+            if (card.classList.contains("active")) {
+
+                card.classList.add("collapse");
+
+                setTimeout(() => {
+
+                    card.classList.remove("active");
+                    card.classList.remove("collapse");
+
+                    cards.forEach(other => {
+
+                        other.classList.remove("hide");
+
+                    });
+
+                }, 500); // Match your CSS transition duration
+
+                return;
+            }
+
+            // -----------------------------
+            // Reset all cards
+            // -----------------------------
+            cards.forEach(other => {
+
+                other.classList.remove("active");
+                other.classList.remove("collapse");
+                other.classList.remove("hide");
+
+            });
+
+            // -----------------------------
+            // Expand clicked card
+            // -----------------------------
+            card.classList.add("active");
+
+            // Fade other cards
+            cards.forEach(other => {
+
+                if (other !== card) {
+
+                    other.classList.add("hide");
+
+                }
+
+            });
+
+        });
+
+    });
+
+}
+
+// // end here

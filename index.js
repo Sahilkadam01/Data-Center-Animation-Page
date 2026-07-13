@@ -25,6 +25,8 @@ capCards.forEach(card => {
 
 
 // partner section js start from here
+
+
 const cards = document.querySelectorAll(".partner-card");
 
 /* EXPAND BUTTON */
@@ -224,30 +226,6 @@ if (packagingSection)
 
     let shrinkStarted = false;
 
-/* ==========================================
-   SCROLL LOCK
-========================================== */
-let scrollLocked = false;
-const body = document.body;
-
-function lockScroll() {
-
-    if (scrollLocked) return;
-
-    scrollLocked = true;
-
-    body.classList.add("scroll-lock");
-
-}
-
-function unlockScroll() {
-
-    scrollLocked = false;
-
-    body.classList.remove("scroll-lock");
-
-}
-
 
     /* ==========================================
        SECTION ENTRY
@@ -272,7 +250,6 @@ function unlockScroll() {
         setTimeout(() => {
 
             titleWrap.classList.add("animate");
-            lockScroll();
 
         }, 600);
 
@@ -294,11 +271,7 @@ function unlockScroll() {
 
             lockScroll();
 
-            introVideo.play().catch(() => {
-            
-                unlockScroll();
-            
-            });
+            introVideo.play().catch(() => {});
 
             /* Wait for metadata */
 
@@ -407,7 +380,6 @@ function unlockScroll() {
         introVideo.pause();
 
         introVideo.currentTime = 0;
-        unlockScroll();
 
         /* Hide intro */
 
@@ -472,11 +444,6 @@ function unlockScroll() {
 
 }
 
-introVideo.addEventListener("ended", () => {
-
-    unlockScroll();
-
-});
 
 /* ==========================================
    INTERSECTION OBSERVER (Desktop Only)
@@ -497,7 +464,6 @@ if (window.innerWidth > 1024) {
             
             } else {
             
-                if (scrollLocked) return;
 
                 /* Allow animation again */
 
