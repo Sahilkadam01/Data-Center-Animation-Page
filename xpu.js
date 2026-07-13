@@ -27,7 +27,7 @@ document.addEventListener("DOMContentLoaded", () => {
     
     let progress = 0;
     
-    const FRAME_LERP = 0.08;
+    const FRAME_LERP = 0.05;
 
 
 
@@ -238,11 +238,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
         /* INTRO */
 
-        if(progress < .25){
+        if(progress < .10){
 
 
             let p =
-            progress/.25;
+            progress/.10;
 
 
             intro.style.opacity = 1;
@@ -269,7 +269,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
             let videoProgress =
-            (progress-.25)/.75;
+            (progress-.10)/.95;
 
 
 
