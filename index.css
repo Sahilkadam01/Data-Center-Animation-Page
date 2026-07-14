@@ -1084,8 +1084,8 @@ padding: clamp(15px, 2vw, 60px);
     min-height:100vh;
     height:clamp(700px,100vh,1200px);
     overflow:hidden;
-    background: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='6' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' fill='white' opacity='0.8'/%3E%3C/svg%3E"), radial-gradient(circle at 96.7541% 4.2753%, #000000, transparent 100%), radial-gradient(circle at 13.605% 59.9583%, #000000, transparent 100%), radial-gradient(circle at 44.8895% 64.1293%, #ff9800, transparent 100%), linear-gradient(45deg, #000000, #000000, #ff9800);
-  background-blend-mode: overlay, normal, normal, normal;
+    /* background: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='6' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' fill='white' opacity='0.8'/%3E%3C/svg%3E"), radial-gradient(circle at 96.7541% 4.2753%, #000000, transparent 100%), radial-gradient(circle at 13.605% 59.9583%, #000000, transparent 100%), radial-gradient(circle at 44.8895% 64.1293%, #ff9800, transparent 100%), linear-gradient(45deg, #000000, #000000, #ff9800);
+  background-blend-mode: overlay, normal, normal, normal; */
 }
 
 /* FULLSCREEN STATE */
