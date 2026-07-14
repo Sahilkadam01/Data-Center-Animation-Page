@@ -2355,13 +2355,8 @@ section.last-sec .cap-card-header {
 
 @media (max-height: 768px) and (width<=990px) {
     .packaging-section .packaging-content {
-        top: 15%;
+        top: 25%;
     }
 }
 
-@media (max-height:700px) and (width<=990px){
-    .packaging-section .packaging-content {
-        top: 15%;
-    }
-}
 
