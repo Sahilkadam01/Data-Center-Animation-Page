@@ -26,9 +26,7 @@ a{
     margin:auto;
 }
 
-/* ====================
-HEADER
-==================== */
+/* ====================HEADER==================== */
 
 .header{
     position:fixed;
@@ -112,9 +110,7 @@ HEADER
     transition:.4s;
 }
 
-/* ====================
-HERO
-==================== */
+/* ====================HERO==================== */
 
 .hero{
     height:100vh;
@@ -130,9 +126,7 @@ HERO
     line-height:1;
 }
 
-/* ====================
-FOOTER
-==================== */
+/* ====================FOOTER==================== */
 
 .footer{
     position:relative;
@@ -215,9 +209,7 @@ FOOTER
     color:#777;
 }
 
-/* ====================
-ANIMATIONS
-==================== */
+/* ====================ANIMATIONS==================== */
 
 @keyframes headerReveal{
     from{
@@ -308,7 +300,7 @@ ANIMATIONS
   
   .bookmark_nav {
     position: sticky;
-    top: 80px; /* Adjust according to header height */
+    top: 80px; 
     z-index: 999;
     background: #f5f5f5;
     border-bottom: 1px solid #e6e6e6;
@@ -417,28 +409,21 @@ ANIMATIONS
   }
   
   
-  /* =========================
-  MOBILE
-  ========================= */
+  /* =========================MOBILE========================= */
   
   @media (max-width: 991px) {
   
     
   }
   
-  /* =========================
-  SMALL MOBILE
-  ========================= */
+  /* =========================SMALL MOBILE========================= */
   
   @media (max-width: 767px) {
   
     .bookmark_nav {
-      top: 60px; /* mobile header height */
+      top: 60px; 
     }
   
-  /*   .bookmark_item {
-      width: 160px;
-    } */
   
     .bookmark_item span {
       font-size: 15px;
@@ -573,13 +558,14 @@ width: clamp(30%, 34vw, 50%);
     flex: 0 0 45%;
     transform: scale(1);
     position: absolute;
-    inset: 0;
     flex-direction: row-reverse;
     z-index: 1;
+
 }
 
 .asic-section .asic-card.has-active .card-item.active{
     animation:expandCard .9s cubic-bezier(.22,1,.36,1) forwards;
+    
 }
 
 .asic-section .asic-card.has-active .card-item.collapse{
@@ -680,7 +666,6 @@ padding: clamp(15px, 2vw, 60px);
 .asic-section .card-item h3{
 
     color:#fff;
-font-family: 'Riona Sans Light';
     margin-bottom:16px;
 
     font-size:clamp(16px,1.2vw,20px);
@@ -809,16 +794,13 @@ font-family: 'Riona Sans Light';
     color: #ffffff;
     font-size: clamp(20px, 4vw, 40px);
     margin: 0;
-    font-family: 'Riona Sans Light';
     transition:
         transform .8s cubic-bezier(.22,.61,.36,1),
         opacity .8s ease;
 
 }
 
-/* ==========================================
-   DESCRIPTION WRAPPER
-========================================== */
+/* ==========================================DESCRIPTION WRAPPER========================================== */
 
 .asic-section .asic-description{
 
@@ -828,24 +810,19 @@ font-family: 'Riona Sans Light';
 
 }
 
-/* ==========================================
-   SUB TITLE
-========================================== */
+/* ==========================================SUB TITLE========================================== */
 
 .asic-section .asic-subtitle{
 
     color: #ff9800;
     font-size: clamp(20px, 3vw, 35px);
-    font-family: 'Riona Sans Light';
     margin:0 0 14px;
     transition:
         transform .8s cubic-bezier(.22,.61,.36,1),
         opacity .8s ease;
 }
 
-/* ==========================================
-   DESCRIPTION
-========================================== */
+/* ==========================================DESCRIPTION========================================== */
 
 .asic-section .asic-desc{
 
@@ -920,7 +897,7 @@ font-family: 'Riona Sans Light';
 
 @keyframes expandCard {
     0% {
-        width: 0%;
+        
         opacity: 0.4;
         transform: scaleX(0.96);
         transform-origin: center;
@@ -936,7 +913,7 @@ font-family: 'Riona Sans Light';
     }
 
     100% {
-        width: 100%;
+        
         opacity: 1;
         transform: scaleX(1);
         transform-origin:center;
@@ -946,13 +923,13 @@ font-family: 'Riona Sans Light';
 @keyframes collapseCard{
 
     from{
-        width:100%;
+        /* width:100%; */
         opacity:1;
         transform:scaleX(1);
     }
 
     to{
-        width:0%;
+        /* width:0%; */
         opacity:0;
         transform:scaleX(.96);
     }
@@ -968,7 +945,7 @@ font-family: 'Riona Sans Light';
 .packaging-section .img-card{
     display:none;
     width:100%;
-    height:100%;
+    height:60%;
     object-fit:cover;
 }
 
@@ -1117,13 +1094,12 @@ font-family: 'Riona Sans Light';
     position:absolute;
 
   
-    left:50%;
+    left:72%;
     top:50%;
 
-    width:100vw;
-    height:100vh;
+    width:min(50vw,900px);
 
-    transform:translate(-50%,-50%);
+    transform:translate(-50%,-55%);
 
     overflow:hidden;
 
@@ -1210,7 +1186,7 @@ font-family: 'Riona Sans Light';
 .packaging-section .pack-tab{
 
     padding:14px 28px;
-
+   border: none;
    background: #6763636b;
 
     color:#fff;
@@ -1239,29 +1215,14 @@ font-family: 'Riona Sans Light';
     z-index: 1;
 }
 
-.packaging-video-wrapper.active{
+.packaging-section  .packaging-video-wrapper.active{
     opacity:1;
     visibility:visible;
     pointer-events:auto;
-    z-index:5;
-}
-
-.packaging-video-wrapper{
     z-index:0;
+   
 }
 
-
-.packaging-section .packaging-video-wrapper{
-    width:100vw;
-    height:100vh;
-    will-change: width,height,left,top;
-    transition:
-        width .9s cubic-bezier(.87,0,.13,1),
-        height .9s cubic-bezier(.87,0,.13,1),
-        border-radius .9s cubic-bezier(.87,0,.13,1),
-        transform .8s ease,
-        opacity .8s ease;
-}
 
 .packaging-section .packaging-video-wrapper.shrink{
 
@@ -1700,7 +1661,6 @@ gap:50px 30px;
 
 .partner-section .partner-content p {
     color: rgba(255,255,255,.7);
-    /* line-height: 1.8; */
     margin-bottom: 30px;
 }
 
@@ -1796,7 +1756,6 @@ gap:50px 30px;
 
 /* xpu section css start from hre */
 
-
 .xpu-blocks__intro {
     position: absolute;
     inset: 0;
@@ -1826,9 +1785,6 @@ gap:50px 30px;
     font-size: clamp(18px, 2vw, 26px);
     line-height: 1.6;
 }
-
-
-
 
 
 .xpu-blocks{
@@ -1929,10 +1885,6 @@ section.packaging-section{
     justify-content: space-between;
 }
 
-/* section.packaging-section .packaging-content-wrapper .packaging-content {
-    position: unset;
-    transform: none !important;
-} */
 
 .packaging-section .packaging-tabs {
     align-items: center;
@@ -1951,14 +1903,14 @@ section.packaging-section{
 }
 
 
-/* .packaging-section .packaging-video-wrapper {
+.packaging-section .packaging-video-wrapper {
     position: unset;
     transform: translate(0);
     overflow: hidden;
     transition:none; 
     width: 100%;
     height: 100%;
-} */
+}
 /* end here */
 
 /* new static css for mobile */
@@ -1972,7 +1924,6 @@ section.packaging-section{
         display: flex;
         flex-direction: column;
         gap:50px;
-        /* justify-content: space-between; */
     }
 
     .asic-section .asic-content {
@@ -1996,19 +1947,6 @@ section.packaging-section{
         object-fit: contain;
       
     }
-
-    /* section.packaging-section .packaging-intro-video-wrapper
-    {
-        display: none !important;
-    }
-    .packaging-section .img-card {
-       
-        
-        opacity: 1 !important;
-        display: block !important;
-    } */
-
-
 
     /* custom asic section css  */
     .asic-section .media-wrapper,
@@ -2272,9 +2210,7 @@ section.last-sec .cap-card-header {
 
 /* end here */
 
-    /* .asic-section .asic-title {
-        font-size:clamp(36px, 4vh, 90px);
-    } */
+    
 
 
     .hero h1{
@@ -2307,9 +2243,7 @@ section.last-sec .cap-card-header {
 .asic-section .tab-title {
   
     width: clamp(100%, 70vw, 95%);
-    /* margin: 0 auto; */
 }
-
 
 /* end here */
 
@@ -2346,6 +2280,19 @@ section.last-sec .cap-card-header {
         font-size:clamp(20px, 2vh, 40px);
     }
 
+    .asic-section .asic-subtitle {
+        font-size:clamp(18px, 2vh, 30px);
+    }
+    .asic-section .media-wrapper.shrink {
+        
+        top: 70%;
+       
+    }
+    .asic-section .media-wrapper.shrink:has(.asic-slide:nth-child(3).active) {
+        
+        top: 66%;
+        
+    }
     /* end here */
 
     /* packaging section css */
