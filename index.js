@@ -193,12 +193,11 @@ document.addEventListener("click", (e) => {
 /* ==========================================PACKAGING SECTION========================================== */
 
 
-/* ==========================================
-   PACKAGING SECTION
-========================================== */
+
 
 const packagingSection =
 document.querySelector(".packaging-section");
+
 
 if (packagingSection)
 {

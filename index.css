@@ -1902,14 +1902,27 @@ section.packaging-section{
     flex-direction: column;
 }
 
-
+.packaging-section .img-card {
+    
+    height: 50%;
+}
 .packaging-section .packaging-video-wrapper {
-    position: unset;
-    transform: translate(0);
-    overflow: hidden;
-    transition:none; 
+    top: 50%;
+    left: 0;
+    transform:none;
     width: 100%;
     height: 100%;
+}
+
+.packaging-section .packaging-content{
+
+    width:min(90%,93%);
+    left:50%;
+    top:25%;
+
+    text-align:center;
+
+    transform:translateX(-50%) !important;
 }
 /* end here */
 
@@ -1943,7 +1956,7 @@ section.packaging-section{
     }
 
     .asic-section .asic-video {
-        
+    
         object-fit: contain;
       
     }
@@ -2057,16 +2070,7 @@ section.packaging-section{
 /* end here */
 
     /* packaging section query start from here  */
-    .packaging-section .packaging-content{
-
-        width:min(90%,93%);
-        left:50%;
-        top:130px;
-
-        text-align:center;
-
-        transform:translateX(-50%) !important;
-    }
+    
 
 
     .packaging-section .packaging-desc{
@@ -2187,11 +2191,12 @@ section.last-sec .cap-card-header {
     }
     
     
-        .packaging-section .packaging-video-wrapper {
-            
-            top: 39%;
-            
-        }   
+    .packaging-section .packaging-content {
+        
+        
+        top: 18%;
+        
+    }
     
      .packaging-section .packaging-tabs{
             gap:10px;
@@ -2219,12 +2224,26 @@ section.last-sec .cap-card-header {
  
 }
 
+@media screen and (width<=650px)
+{
+
+    section.packaging-section {
+        min-height: 600px;
+        height: 85%;
+    }
+
+    .packaging-section .packaging-content {
+        top: 23%;
+    }
+}
+
+
 @media screen and (width<=500px)
 {
-        .packaging-section .packaging-content {
-            top: 140px;
-       
+    .asic-section .asic-video {
+        height: 60%;
     }
+
 }
 
 @media (width<=475px)
