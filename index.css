@@ -2235,6 +2235,13 @@ section.last-sec .cap-card-header {
 @media screen and (width<=650px)
 {
 
+    .asic-section {
+        
+        height: 75%;
+        
+        gap: 30px;
+    }
+
     .interconnect .slider-dots span {
         border-radius: 20px;
         padding: 10px;
